@@ -1,0 +1,13 @@
+#appCapsule{
+    animation: transitionIn 1.5s;
+}
+@keyframes transitionIn{
+    from{
+        opacity : 0;
+        transform : translatex(40px);
+    }
+    to{
+        opacity : 1;
+        transform : translatex(0);
+    }
+}
