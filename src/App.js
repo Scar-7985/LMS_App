@@ -9,6 +9,9 @@ import Course from './Pages/Course';
 import RecommendCourse from './components/RecommendCourse';
 import MyCourses from './Pages/MyCourses';
 import CourseDetail from './Pages/CourseDetails';
+import CategorizedCourse from './Pages/CategorizedCourse';
+import VideoPlayer from './Pages/VideoPlayer';
+import Error from './Pages/Error';
 
 const App = () => {
 
@@ -19,7 +22,7 @@ const App = () => {
   return (
     <div style={{ padding: '56px 0 0 0' }}>
       <BrowserRouter>
-      <ScrollToTop />
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={
             <>
@@ -33,10 +36,20 @@ const App = () => {
               <Course />
             </>
           } />
+          <Route path='/course_category/:courseType' element={
+            <>
+              <CategorizedCourse />
+            </>
+          } />
           <Route path='/course-detail/:courseId' element={
             <>
               <Header profile={true} title={'Course Detail'} showSearch={true} />
               <CourseDetail />
+            </>
+          } />
+          <Route path='/video/:getVideoId' element={
+            <>
+              <VideoPlayer />
             </>
           } />
           <Route path='/recommended-course' element={
@@ -55,6 +68,12 @@ const App = () => {
             <>
               <Header profile={true} title={'My Courses'} showSearch={true} />
               <MyCourses />
+            </>
+          } />
+          <Route path='*' element={
+            <>
+              <Header profile={true} title={'Error - 404'} showSearch={true} />
+              <Error />
             </>
           } />
         </Routes>

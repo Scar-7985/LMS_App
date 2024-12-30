@@ -14,11 +14,10 @@ const TrendingCourse = () => {
         courseData.map((item, index) => {
           return (
             <div className="col-6 mt-2" key={item.id}>
-              <Link to={`/course-detail/${item.id}`} className='card shadow text-decoration-none border'>
+              <Link to={`/course-detail/${item.program_name}`} className='card shadow text-decoration-none border'>
                 <CardPopular
-                  key={item.id}
                   title={item.program_name}
-                  image={`https://picsum.photos/id/${index + 49}/200/200`}
+                  image={`https://wealthsaga.store/new/app/upload/course_img/${item.img}`}
                   of_price={item.of_price}
                   ac_price={item.ac_price}
                   category={item.category}

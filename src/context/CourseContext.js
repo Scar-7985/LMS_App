@@ -7,8 +7,6 @@ const CourseProvider = ({ children }) => {
     const [courseCategory, setCourseCategory] = useState([]);
     const [courseData, setCourseData] = useState([]);
     const [videoData, setVideoData] = useState([]);
-
-    // console.log(courseData);
     
 
     useEffect(() => {
