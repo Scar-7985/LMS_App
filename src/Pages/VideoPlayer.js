@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { CourseContext } from '../context/CourseContext';
 import VideoCard from '../components/VideoCard';
+import Header from '../components/Header';
 
 const VideoPlayer = () => {
     const { videoData } = useContext(CourseContext);
@@ -36,6 +37,8 @@ const VideoPlayer = () => {
     );
 
     return (
+        <>
+        <Header profile={true} showSearch={false} />
         <div className="d-flex flex-column" style={{ position: 'relative' }}>
             <div className="bg-white sticky-top" style={{ top: '56px', zIndex: '50' }}>
                 <video
@@ -77,6 +80,7 @@ const VideoPlayer = () => {
                 ))}
             </div>
         </div>
+        </>
     );
 };
 

@@ -191,8 +191,6 @@ const CourseDetail = () => {
                                                                     title={item.title}
                                                                     image={`https://wealthsaga.store/new/app/upload/video_thumb/${item.thumb}`}
                                                                     category={item.category}
-                                                                    of_price={item.of_price}
-                                                                    ac_price={item.ac_price}
                                                                 />
                                                             </div>
                                                         )

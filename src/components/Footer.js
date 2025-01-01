@@ -30,7 +30,7 @@ const Footer = () => {
                         <strong>My Courses</strong>
                     </div>
                 </Link>
-                <Link style={{ textDecoration: 'none' }} to={logged ? '/profile-setting' : '/login'} className={`item ${Pathname === '/profile-setting' ? 'active' : ''}`}>
+                <Link style={{ textDecoration: 'none' }} to={logged ? '/profile' : '/login'} className={`item ${Pathname === '/profile' ? 'active' : ''}`}>
                     <div className="col">
                         <ion-icon name="person"></ion-icon>
                         <strong>Profile</strong>

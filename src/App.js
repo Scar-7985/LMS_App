@@ -12,6 +12,13 @@ import CourseDetail from './Pages/CourseDetails';
 import CategorizedCourse from './Pages/CategorizedCourse';
 import VideoPlayer from './Pages/VideoPlayer';
 import Error from './Pages/Error';
+import UpdateProfile from './Pages/UpdateProfile'
+import Profile from './Pages/Profile';
+import Login from './Pages/Login';
+import Notification from './Pages/Notification';
+import MyOrders from './Pages/MyOrders';
+import LegalTerms from './Pages/LegalTerms';
+import Support from './Pages/Support';
 
 const App = () => {
 
@@ -68,6 +75,48 @@ const App = () => {
             <>
               <Header profile={true} title={'My Courses'} showSearch={true} />
               <MyCourses />
+            </>
+          } />
+          <Route path='/profile' element={
+            <>
+              <Header profile={true} title={'Profile'} showSearch={false} />
+              <Profile />
+            </>
+          } />
+          <Route path='/update-profile' element={
+            <>
+              <Header goBackTo={'/profile'} title={'Update Profile'} showSearch={false} />
+              <UpdateProfile />
+            </>
+          } />
+          <Route path='/login' element={
+            <>
+              <Header profile={true} title={'Login'} showSearch={true} />
+              <Login />
+            </>
+          } />
+          <Route path='/notification' element={
+            <>
+              <Header goBackTo={'/profile'} title={'Notification'} showSearch={false} />
+              <Notification />
+            </>
+          } />
+          <Route path='/my-orders' element={
+            <>
+              <Header goBackTo={'/profile'} title={'My Orders'} showSearch={false} />
+              <MyOrders />
+            </>
+          } />
+          <Route path='/legal-terms' element={
+            <>
+              <Header goBackTo={'/profile'} title={'My Orders'} showSearch={false} />
+              <LegalTerms />
+            </>
+          } />
+          <Route path='/support' element={
+            <>
+              <Header goBackTo={'/profile'} title={'Support'} showSearch={false} />
+              <Support />
             </>
           } />
           <Route path='*' element={

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CourseContext } from '../context/CourseContext'
+import VideoCard from '../components/VideoCard';
 
 const MyCourses = () => {
 
@@ -13,14 +14,14 @@ const MyCourses = () => {
 
 
 
-            <div className='d-flex flex-column px-2'>
+            <div className='d-flex flex-column px-2 pb-5'>
                 <h4 className='text-muted text-center my-1 mt-2' style={{ fontSize: '15px' }}>
                     {
                         courseData.length > 0 ? ('-- Your Purchased Courses --') : ("You haven't purchased any courses")
                     }
                 </h4>
 
-                <div className='pb-2' style={{ minHeight: 'calc(100vh - 154px)' }}>
+                <div className='pb-4'>
                     {
                         courseData.length > 0 ?
                             (
@@ -30,25 +31,15 @@ const MyCourses = () => {
                                         <Link
                                             to={`/course-detail/${item.id}`}
                                             key={item.id}
-                                            className="card shadow border mt-1"
+                                            className="card mt-2 shadow text-decoration-none border"
                                             style={{ textDecoration: 'none', padding: '4px' }}
                                         >
-                                            <div className="card-body d-flex p-0">
-                                                <img src={'/assets/img/course/1.png'} className='' alt="course"
-                                                    style={{ width: '100px', height: '100px', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }}
-                                                />
-                                                <div className='pl-1 py-2 w-100'>
-                                                    <div style={{ fontWeight: '600', fontSize: '15px', overflowWrap: 'break-word', lineHeight: '1', color: 'orangered' }} >
-                                                        {item.program_name.length > 35 ? item.program_name.substring(0, 35) + '...' : item.program_name}
-                                                    </div>
-                                                    <div className='mt-1' style={{ color: 'orangered', fontSize: '12px', fontWeight: '600' }}>
-                                                        Duration: {item.video_duration}
-                                                    </div>
-                                                </div>
-                                                <div style={{ alignSelf: 'center', fontSize: '30px', color: 'orangered' }}>
-                                                    <ion-icon name="play-circle"></ion-icon>
-                                                </div>
-                                            </div>
+                                            <VideoCard
+                                                image={`https://wealthsaga.store/new/app/upload/course_img/${item.img}`}
+                                                title={item.program_name.length > 35 ? item.program_name.substring(0, 35) + '...' : item.program_name}
+                                                category={item.category}
+                                            />
+
                                         </Link>
                                     )
                                 })
