@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import secureLocalStorage from "react-secure-storage"
 
 const Profile = () => {
+
+    const navigate = useNavigate();
+    const LogOut = () => {
+        // secureLocalStorage.removeItem("login_id");
+        window.localStorage.removeItem("login_id");
+        navigate('/');
+    }
 
 
     return (
@@ -108,7 +116,8 @@ const Profile = () => {
                                     <div className="btn btn-text-secondary py-3"
                                         data-dismiss="modal"
                                         style={{ cursor: 'pointer', fontWeight: '500' }}>CLOSE</div>
-                                    <div className="btn btn-text-primary py-3" data-dismiss="modal" style={{ cursor: 'pointer', fontWeight: '500' }} >OK</div>
+                                    <div className="btn btn-text-primary py-3" data-dismiss="modal" style={{ cursor: 'pointer', fontWeight: '500' }}
+                                        onClick={LogOut}>OK</div>
                                 </div>
                             </div>
                         </div>

@@ -38,7 +38,7 @@ const VideoPlayer = () => {
 
     return (
         <>
-        <Header profile={true} showSearch={false} />
+        <Header goBackTo={'/my-courses'} showSearch={false} />
         <div className="d-flex flex-column" style={{ position: 'relative' }}>
             <div className="bg-white sticky-top" style={{ top: '56px', zIndex: '50' }}>
                 <video

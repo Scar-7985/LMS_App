@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import he from 'he';
 import { CourseContext } from '../context/CourseContext';
 import VideoCard from '../components/VideoCard';
+import { isAuthenticated } from '../define/Authenticate'
 
 const CourseDetail = () => {
 
@@ -18,18 +19,17 @@ const CourseDetail = () => {
     }
 
     const filteredVideo = filteredCourse ? videoData.filter((item) => String(item.category) === String(filteredCourse.id)) : [];
-    
+
     const [goToVideo, setGoToVideo] = useState('#');
 
     useEffect(() => {
-        if (filteredVideo) {
+        if (filteredCourse && filteredVideo.length > 0) {
             setGoToVideo(String(filteredVideo[0].id));
         } else {
-            console.error('Video not found');
+            console.error('Video not found or course is unavailable');
         }
-    }, [filteredVideo]);
+    }, [filteredCourse, filteredVideo]);
 
-    const [logged, setLogged] = useState(true);
     const [showInfoType, setShowInfoType] = useState('About');
 
 
@@ -47,14 +47,14 @@ const CourseDetail = () => {
                                 style={{ fontWeight: '500', fontSize: '18px', display: 'grid', placeItems: 'center' }}>
                                 ₹ {filteredCourse.of_price}
                             </div>
-                            {logged ?
+                            {isAuthenticated ?
                                 // If (status === 1) Purchased else not Purchased
                                 (filteredCourse.status === 1 ? (
                                     <button>
                                         <Link
                                             to={`/video/${goToVideo}`}
                                             style={{ color: 'white', textDecoration: 'none' }}>
-                                            Watch now 
+                                            Watch now
                                         </Link>
                                     </button>
                                 ) : (
@@ -228,7 +228,7 @@ const CourseDetail = () => {
 
             ) : (
                 <div style={{ width: '100%', height: 'calc(100vh - 112px)', display: 'grid', placeItems: 'center' }}>
-                    <div class="spinner-border text-success" role="status">
+                    <div className="spinner-border text-success" role="status">
                     </div>
                 </div>
             )}

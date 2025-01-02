@@ -3,15 +3,16 @@ import HeroBanner from '../components/HeroBanner'
 import CategoryComp from '../components/CategoryComp';
 import RecommendCourse from '../components/RecommendCourse'
 import TrendingCourse from "../components/TrendingCourse";
+import { useContext } from "react";
+import { CourseContext } from "../context/CourseContext";
 
-function Home() {
+const Home = () => {
+
 
     return (
 
-
-
         <div className='bg-white' style={{padding: '0 0 80px 0'}}>
-
+           
             <HeroBanner />
             <div className="section mt-4">
                 <div className="section-heading">
@@ -19,7 +20,6 @@ function Home() {
                     <Link style={{ textDecoration: 'none' }} to='/course' className="link">See all</Link>
                 </div>
             </div>
-
 
             <CategoryComp />
 

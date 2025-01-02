@@ -10,22 +10,24 @@ const Course = () => {
 
   return (
     <div className="bg-white" style={{ height: 'calc(100vh - 116px)' }}>
-      <div className="row px-2">
+      <div className="row mx-1">
         {courseCategory.length > 0 ? (
           courseCategory.map((item) => {
             return (
-              <Link to={`/course_category/${item.ser_title}`}
-                className="col-6 px-1 mt-1"
-                key={item.id}
-                style={{ height: '140px', position: 'relative' }}
-              >
-                <img src={`https://wealthsaga.store/new/app/upload/category_img/${item.image}`} alt="img" className="image-block imaged" style={{ width: '100%', height: '100%', filter: 'brightness(40%)' }} />
-                <div className="text-white" style={{ position: 'absolute', top: '0', left: '0', bottom: '0', right: '0', display: 'grid', placeItems: 'center', }}>
-                  <div className='text-white text-center p-2' style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', fontSize: '18px', fontWeight: '500' }}>
-                    <div dangerouslySetInnerHTML={{ __html: item.ser_title }} />
+              <div
+                className="col-6 d-flex flex-column px-1 mt-3"
+                key={item.id}>
+                <Link
+                  to={`/course_category/${item.ser_title}`}
+                  className="border border-2 shadow" style={{ height: '200px', borderTopLeftRadius: '8px', borderTopRightRadius: '8px', overflow: 'hidden', textDecoration: 'none' }}>
+                  <img src={`https://wealthsaga.store/new/app/upload/category_img/${item.image}`} alt="img" className="" style={{ width: '100%', height: '60%' }} />
+                  <div className="pt-2" style={{ height: '40%', }}>
+                    <div className='text-dark text-center' style={{ width: '100%', fontSize: '16px', fontWeight: '600' }}>
+                      <div dangerouslySetInnerHTML={{ __html: item.ser_title.length > 50 ? item.ser_title.substring(0, 50) + "..." : item.ser_title }} />
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             )
           })
         ) : (

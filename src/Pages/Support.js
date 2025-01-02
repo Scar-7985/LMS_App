@@ -28,11 +28,11 @@ function Support() {
                                 </div>
                             </div>
 
-                            <div class="form-group boxed">
-                                <div class="input-wrapper">
-                                    <label class="label" for="address5">Message</label>
-                                    <textarea id="address5" rows="4" class="form-control" placeholder='Your message here'></textarea>
-                                    <i class="clear-input"><ion-icon name="close-circle"></ion-icon></i>
+                            <div className="form-group boxed">
+                                <div className="input-wrapper">
+                                    <label className="label" htmlFor="address5">Message</label>
+                                    <textarea id="address5" rows="4" className="form-control" placeholder='Your message here'></textarea>
+                                    <i className="clear-input"><ion-icon name="close-circle"></ion-icon></i>
                                 </div>
                             </div>
 
@@ -51,21 +51,21 @@ function Support() {
             {/* ===================================== */}
             {/* Profile Update Success Toast */}
 
-            <div class="modal fade dialogbox" id="DialogIconedSuccess" data-backdrop="static" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-icon text-success">
+            <div className="modal fade dialogbox" id="DialogIconedSuccess" data-backdrop="static" tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-icon text-success">
                             <ion-icon name="checkmark-circle"></ion-icon>
                         </div>
-                        <div class="modal-header">
-                            <h5 class="modal-title">Success</h5>
+                        <div className="modal-header">
+                            <h5 className="modal-title">Success</h5>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             Your request sent successfully
                         </div>
-                        <div class="modal-footer">
-                            <div class="btn-inline">
-                                <a href="#" class="btn" data-dismiss="modal">CLOSE</a>
+                        <div className="modal-footer">
+                            <div className="btn-inline">
+                                <a href="#" className="btn" data-dismiss="modal">CLOSE</a>
                             </div>
                         </div>
                     </div>

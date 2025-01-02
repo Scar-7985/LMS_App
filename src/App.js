@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { CourseContext } from './context/CourseContext';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import ProtectedRoutes from './components/ProtectedRoutes';
 import ScrollToTop from './components/ScrollToTop'
 import Footer from './components/Footer'
 import Header from './components/Header';
@@ -11,7 +12,6 @@ import MyCourses from './Pages/MyCourses';
 import CourseDetail from './Pages/CourseDetails';
 import CategorizedCourse from './Pages/CategorizedCourse';
 import VideoPlayer from './Pages/VideoPlayer';
-import Error from './Pages/Error';
 import UpdateProfile from './Pages/UpdateProfile'
 import Profile from './Pages/Profile';
 import Login from './Pages/Login';
@@ -25,50 +25,65 @@ const App = () => {
   const courseValue = useContext(CourseContext);
   // console.log(courseValue);
 
-
   return (
     <div style={{ padding: '56px 0 0 0' }}>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path='/' element={
-            <>
-              <Header profile={true} title={'Home'} showSearch={true} />
-              <Home />
-            </>
-          } />
-          <Route path='/course' element={
-            <>
-              <Header profile={true} title={'Courses'} showSearch={true} />
-              <Course />
-            </>
-          } />
-          <Route path='/course_category/:courseType' element={
-            <>
-              <CategorizedCourse />
-            </>
-          } />
-          <Route path='/course-detail/:courseId' element={
-            <>
-              <Header profile={true} title={'Course Detail'} showSearch={true} />
-              <CourseDetail />
-            </>
-          } />
+      <ScrollToTop />
+      <Routes>
+
+        {/* ================== Non-Protected Routes Starts ================== */}
+
+        <Route path='/login' element={
+          <>
+            <Header profile={true} title={'Login'} showSearch={true} />
+            <Login />
+          </>
+        } />
+
+        <Route path='/' element={
+          <>
+            <Header profile={true} title={'Home'} showSearch={true} />
+            <Home />
+          </>
+        } />
+        <Route path='/course' element={
+          <>
+            <Header profile={true} title={'Categories'} showSearch={true} />
+            <Course />
+          </>
+        } />
+        <Route path='/course_category/:courseType' element={
+          <>
+            <CategorizedCourse />
+          </>
+        } />
+        <Route path='/course-detail/:courseId' element={
+          <>
+            <Header profile={true} title={'Course Detail'} showSearch={true} />
+            <CourseDetail />
+          </>
+        } />
+
+        <Route path='/recommended-course' element={
+          <>
+            <Header profile={true} title={'Recommended Courses'} showSearch={true} />
+            <RecommendCourse />
+          </>
+        } />
+        <Route path='/trending-course' element={
+          <>
+            <Header profile={true} title={'Trending Courses'} showSearch={true} />
+            <RecommendCourse />
+          </>
+        } />
+
+        {/* ================== Non-Protected Routes End ================== */}
+
+        {/* ================= Protected Routes Starts ================= */}
+
+        <Route element={<ProtectedRoutes />}>
           <Route path='/video/:getVideoId' element={
             <>
               <VideoPlayer />
-            </>
-          } />
-          <Route path='/recommended-course' element={
-            <>
-              <Header profile={true} title={'Recommended Courses'} showSearch={true} />
-              <RecommendCourse />
-            </>
-          } />
-          <Route path='/trending-course' element={
-            <>
-              <Header profile={true} title={'Trending Courses'} showSearch={true} />
-              <RecommendCourse />
             </>
           } />
           <Route path='/my-courses' element={
@@ -89,12 +104,6 @@ const App = () => {
               <UpdateProfile />
             </>
           } />
-          <Route path='/login' element={
-            <>
-              <Header profile={true} title={'Login'} showSearch={true} />
-              <Login />
-            </>
-          } />
           <Route path='/notification' element={
             <>
               <Header goBackTo={'/profile'} title={'Notification'} showSearch={false} />
@@ -109,7 +118,7 @@ const App = () => {
           } />
           <Route path='/legal-terms' element={
             <>
-              <Header goBackTo={'/profile'} title={'My Orders'} showSearch={false} />
+              <Header goBackTo={'/profile'} title={'Terms & Conditions'} showSearch={false} />
               <LegalTerms />
             </>
           } />
@@ -119,15 +128,18 @@ const App = () => {
               <Support />
             </>
           } />
-          <Route path='*' element={
-            <>
-              <Header profile={true} title={'Error - 404'} showSearch={true} />
-              <Error />
-            </>
-          } />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        </Route>
+
+        {/* ============= On undefined page go to Home Page ============= */}
+        <Route path='*' element={
+          <>
+            <Header profile={true} title={'Home'} showSearch={true} />
+            <Home />
+          </>
+        } />
+
+      </Routes>
+      <Footer />
     </div>
   )
 }

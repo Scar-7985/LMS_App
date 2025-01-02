@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom'
 
 const Footer = () => {
 
-    const [logged, setLogged] = useState(true);
-
     const location = useLocation();
     const Pathname = location.pathname;
 
@@ -24,13 +22,13 @@ const Footer = () => {
                         <strong>Courses</strong>
                     </div>
                 </Link>
-                <Link style={{ textDecoration: 'none' }} to={logged ? '/my-courses' : '/login'} className={`item ${Pathname === '/my-courses' ? 'active' : ''}`}>
+                <Link style={{ textDecoration: 'none' }} to={'/my-courses'} className={`item ${Pathname === '/my-courses' ? 'active' : ''}`}>
                     <div className="col">
                         <ion-icon name="book"></ion-icon>
                         <strong>My Courses</strong>
                     </div>
                 </Link>
-                <Link style={{ textDecoration: 'none' }} to={logged ? '/profile' : '/login'} className={`item ${Pathname === '/profile' ? 'active' : ''}`}>
+                <Link style={{ textDecoration: 'none' }} to={'/profile'} className={`item ${Pathname === '/profile' ? 'active' : ''}`}>
                     <div className="col">
                         <ion-icon name="person"></ion-icon>
                         <strong>Profile</strong>

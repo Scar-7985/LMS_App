@@ -99,21 +99,21 @@ const UpdateProfile = () => {
             {/* ===================================== */}
             {/* Profile Update Success Toast */}
 
-            <div class="modal fade dialogbox" id="DialogIconedSuccess" data-backdrop="static" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-icon text-success">
+            <div className="modal fade dialogbox" id="DialogIconedSuccess" data-backdrop="static" tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-icon text-success">
                             <ion-icon name="checkmark-circle"></ion-icon>
                         </div>
-                        <div class="modal-header">
-                            <h5 class="modal-title">Success</h5>
+                        <div className="modal-header">
+                            <h5 className="modal-title">Success</h5>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             Profile Updated Successfully
                         </div>
-                        <div class="modal-footer">
-                            <div class="btn-inline">
-                                <a href="#" class="btn" data-dismiss="modal">CLOSE</a>
+                        <div className="modal-footer">
+                            <div className="btn-inline">
+                                <a href="#" className="btn" data-dismiss="modal">CLOSE</a>
                             </div>
                         </div>
                     </div>
