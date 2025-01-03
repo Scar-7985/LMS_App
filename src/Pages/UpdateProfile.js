@@ -21,8 +21,8 @@ const UpdateProfile = () => {
                                 accept="image/*"
                             />
                             <img
-                                className="imaged rounded bg-dark"
-                                src={'image'}
+                                className="imaged rounded"
+                                src={"/assets/img/sample/avatar/avatar.png"}
                                 style={{height: '100px', width: '100px'}}
                             />
                             <label htmlFor='changeImage'

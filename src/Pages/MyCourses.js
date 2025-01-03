@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CourseContext } from '../context/CourseContext'
 import VideoCard from '../components/VideoCard';
+import { SITE_URL } from '../define/Define';
 
 const MyCourses = () => {
 
@@ -29,13 +30,13 @@ const MyCourses = () => {
                                 purchasedCourses.map((item) => {
                                     return (
                                         <Link
-                                            to={`/course-detail/${item.id}`}
+                                            to={`/course-detail/${item.program_name}`}
                                             key={item.id}
                                             className="card mt-2 shadow text-decoration-none border"
-                                            style={{ textDecoration: 'none', padding: '4px' }}
+                                            style={{ textDecoration: 'none' }}
                                         >
                                             <VideoCard
-                                                image={`https://wealthsaga.store/new/app/upload/course_img/${item.img}`}
+                                                image={`${SITE_URL}new/app/upload/course_img/${item.img}`}
                                                 title={item.program_name.length > 35 ? item.program_name.substring(0, 35) + '...' : item.program_name}
                                                 category={item.category}
                                             />

@@ -19,6 +19,7 @@ import Notification from './Pages/Notification';
 import MyOrders from './Pages/MyOrders';
 import LegalTerms from './Pages/LegalTerms';
 import Support from './Pages/Support';
+import NonProtectedRoute from './components/NonProtectedRoute';
 
 const App = () => {
 
@@ -26,18 +27,21 @@ const App = () => {
   // console.log(courseValue);
 
   return (
-    <div style={{ padding: '56px 0 0 0' }}>
+    <div style={{ padding: '56px 0 0 0', width: '100vw' }}>
       <ScrollToTop />
       <Routes>
 
         {/* ================== Non-Protected Routes Starts ================== */}
 
-        <Route path='/login' element={
-          <>
-            <Header profile={true} title={'Login'} showSearch={true} />
-            <Login />
-          </>
-        } />
+        <Route element={<NonProtectedRoute />}>
+
+          <Route path='/login' element={
+            <>
+              <Header profile={true} title={'Login'} showSearch={true} />
+              <Login />
+            </>
+          } />
+        </Route>
 
         <Route path='/' element={
           <>
@@ -58,7 +62,7 @@ const App = () => {
         } />
         <Route path='/course-detail/:courseId' element={
           <>
-            <Header profile={true} title={'Course Detail'} showSearch={true} />
+            <Header goBackTo={'/course'} title={'Course Detail'} showSearch={false} />
             <CourseDetail />
           </>
         } />

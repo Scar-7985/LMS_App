@@ -20,7 +20,7 @@ const Profile = () => {
                 <div className="section mt-3 text-center">
                     <div className="avatar-section d-flex flex-column">
                         <div>
-                            <img src={'currentProfilePic'} alt="avatar" className="imaged w100 rounded" />
+                            <img src="/assets/img/sample/avatar/avatar.png" alt="avatar" className="" style={{ width: '50px', borderRadius: '50%' }} />
                         </div>
                         <div>
                             <p className='m-0' style={{ color: 'black', fontWeight: '500' }}>{'Nikhil'}</p>

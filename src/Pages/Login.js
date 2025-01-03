@@ -2,9 +2,12 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { CourseContext } from '../context/CourseContext'
+import { SITE_URL } from '../define/Define';
 import secureLocalStorage from 'react-secure-storage';
 
 const Login = () => {
+
+
 
     const navigate = useNavigate();
     const { isLoggedIn, setIsLoggedIn } = useContext(CourseContext);
@@ -23,7 +26,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsSubmitting(true);
-        axios.post('https://wealthsaga.store/new/app/inc/config/login-query2.php', formData, {
+        axios.post(`${SITE_URL}new/app/inc/config/login-query2.php`, formData, {
             headers: { 'Content-Type': 'application/json' }
         })
             .then(response => {
@@ -64,7 +67,7 @@ const Login = () => {
                     navigate('/');
                 }
 
-            }) 
+            })
             .catch(error => {
                 setIsSubmitting(false);
                 console.log('Error => ', error);

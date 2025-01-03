@@ -18,7 +18,7 @@ const CategorizedCourse = () => {
     if (!selectedCategory) {
         return (
             <>
-                <Header profile={true} title={`${courseType}`} showSearch={true} />
+                <Header goBackTo={'/course'} title={`${courseType}`} showSearch={true} />
                 <div className='pt-5 text-center'>
                     <div class="spinner-border text-success" role="status"></div>
                 </div>
@@ -26,12 +26,11 @@ const CategorizedCourse = () => {
         )
     }
 
-    console.log(courseData
-        .filter((item) => Number(item.category) === Number(selectedCategory)));
+    // console.log(courseData.filter((item) => Number(item.category) === Number(selectedCategory)));
 
     return (
         <>
-            <Header profile={true} title={`${courseType}`} showSearch={true} />
+            <Header goBackTo={'/course'} title={`${courseType}`} showSearch={true} />
             <div className='pb-5'>
                 <div className='row px-2 pb-5'>
 
@@ -42,7 +41,7 @@ const CategorizedCourse = () => {
                                 .filter((item) => Number(item.category) === Number(selectedCategory))
                                 .map((item) => (
                                     <div className="col-6 mt-2" key={item.id}>
-                                        <Link to={`/course-detail/${item.id}`} className='card shadow text-decoration-none border'>
+                                        <Link to={`/course-detail/${item.program_name}`} className='card shadow text-decoration-none border'>
                                             <CardPopular
                                                 title={item.program_name}
                                                 image={`https://wealthsaga.store/new/app/upload/course_img/${item.img}`}

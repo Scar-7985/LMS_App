@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CourseContext } from '../context/CourseContext'
+import { SITE_URL } from "../define/Define";
 
 const Course = () => {
 
@@ -20,9 +21,9 @@ const Course = () => {
                 <Link
                   to={`/course_category/${item.ser_title}`}
                   className="border border-2 shadow" style={{ height: '200px', borderTopLeftRadius: '8px', borderTopRightRadius: '8px', overflow: 'hidden', textDecoration: 'none' }}>
-                  <img src={`https://wealthsaga.store/new/app/upload/category_img/${item.image}`} alt="img" className="" style={{ width: '100%', height: '60%' }} />
-                  <div className="pt-2" style={{ height: '40%', }}>
-                    <div className='text-dark text-center' style={{ width: '100%', fontSize: '16px', fontWeight: '600' }}>
+                  <img src={`${SITE_URL}new/app/upload/category_img/${item.image}`} alt="img" className="" style={{ width: '100%', height: '60%' }} />
+                  <div className="pt-2" style={{ height: '40%' }}>
+                    <div className='text-secondary text-center p-0' style={{ width: '100%', fontSize: '14px', fontWeight: '600' }}>
                       <div dangerouslySetInnerHTML={{ __html: item.ser_title.length > 50 ? item.ser_title.substring(0, 50) + "..." : item.ser_title }} />
                     </div>
                   </div>

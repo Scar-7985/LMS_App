@@ -1,1 +1,0 @@
-export const isAuthenticated = window.localStorage.getItem('login_id');

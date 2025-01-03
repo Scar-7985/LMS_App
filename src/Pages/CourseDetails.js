@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import he from 'he';
 import { CourseContext } from '../context/CourseContext';
 import VideoCard from '../components/VideoCard';
-import { isAuthenticated } from '../define/Authenticate'
+import { isAuthenticated } from '../define/Define'
+import { SITE_URL } from '../define/Define';
 
 const CourseDetail = () => {
 
@@ -13,9 +13,11 @@ const CourseDetail = () => {
 
     // Show specific course details
     const filteredCourse = courseData.find((item) => String(item.program_name) === String(courseId));
+    // console.log('filteredCourse => ', filteredCourse);
+
 
     if (!filteredCourse) {
-        console.error('Course not found');
+        // console.error('Course not found');
     }
 
     const filteredVideo = filteredCourse ? videoData.filter((item) => String(item.category) === String(filteredCourse.id)) : [];
@@ -72,7 +74,7 @@ const CourseDetail = () => {
                         {/* ================ Main Content =================== */}
                         <div className="item">
                             <div className="user-car bg-white">
-                                <img src={`https://wealthsaga.store/new/app/upload/course_img/${filteredCourse.img}`} alt="imaged" className="" style={{ width: '100%', height: '220px' }} />
+                                <img src={`${SITE_URL}new/app/upload/course_img/${filteredCourse.img}`} alt="imaged" className="" style={{ width: '100%', height: '220px' }} />
                             </div>
                             <h1 className='mt-4 px-2'>{filteredCourse.program_name}</h1>
                             <div className='mt-1 px-2' style={{ fontWeight: '500', color: 'black' }}>
@@ -170,7 +172,7 @@ const CourseDetail = () => {
                                     <div className="card shadow my-2">
                                         <div className="card-body m-0">
                                             <h3>Description</h3>
-                                            <div dangerouslySetInnerHTML={{ __html: he.decode(filteredCourse.program_desc) }} />
+                                            <div dangerouslySetInnerHTML={{ __html: filteredCourse.program_desc }} />
                                         </div>
                                     </div>
                                 </>
@@ -189,7 +191,7 @@ const CourseDetail = () => {
                                                             >
                                                                 <VideoCard
                                                                     title={item.title}
-                                                                    image={`https://wealthsaga.store/new/app/upload/video_thumb/${item.thumb}`}
+                                                                    image={`${SITE_URL}new/app/upload/video_thumb/${item.thumb}`}
                                                                     category={item.category}
                                                                 />
                                                             </div>
@@ -240,10 +242,5 @@ const CourseDetail = () => {
         </>
     )
 };
-
-// console.log("filteredVideo =>", filteredCourse[0]);
-
-// const filteredVideo = videoData.filter((item) => filteredCourse.category)
-// console.log(filteredVideo.find((item) => filteredCourse.category));
 
 export default CourseDetail;

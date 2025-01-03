@@ -5,9 +5,9 @@ const VideoCard = (props) => {
     return (
 
 
-        <div className="item">
+        <div className="item border" style={{borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px', overflow: 'hidden'}}>
             <div className="d-flex align-items-center">
-                <img src={props.image} alt="img" className="image-block" style={{ width: '120px', height: '90px', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }} />
+                <img src={props.image} alt="img" className="image-block" style={{ width: '40%', height: '100px', }} />
                 <div className='pl-2 pr-1 w-100'>
                     <h4 className='text-secondary' style={{ fontSize: '16px', fontWeight: '500' }}>{props.title}</h4>
                     <div className='price m-0 mt-1 p-0 d-flex justify-content-between align-items-center'>

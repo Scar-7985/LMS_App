@@ -1,62 +1,26 @@
-import React from "react";
-import '../../node_modules/bootstrap/dist/css/bootstrap.css'
-import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+import React, { useContext } from "react";
+import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
+import { SITE_URL } from "../define/Define.js";
+import { CourseContext } from '../context/CourseContext.js';
 
 const HeroBanner = () => {
+  const { bannerData } = useContext(CourseContext);
+  // console.log('banner => ', bannerData.filter((item) => item.status === 1));
+
 
   return (
-
     <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
-        <div className="carousel-item active position-relative text-center">
-          <img src="assets/img/bg/open-laptop.jpg" className="d-block w-100" alt="pic" style={{ height: '200px', zIndex: '0' }} />
-          <div className="text-left"
-            style={{
-              position: 'absolute', top: '50%',
-              left: '20%', transform: 'translate(-20%, -50%)', zIndex: '1',
-            }}>
-            <div className="text-white" style={{ fontSize: '14px' }}>Learn From Basics</div>
-            <div className="text-white" style={{ fontSize: '20px', fontWeight: '600' }}>UI and UX Designs</div>
-            <button className="button-56 mt-1" style={{fontWeight: '600'}}>Know More</button>
+        {/* filter data where status === 1 */}
+        {bannerData.filter((item) => item.status === 1).map((item, index) => (
+          <div
+            className={`carousel-item ${index === 0 ? 'active' : ''} position-relative text-center`}
+            key={item.id}
+          >
+            <img src={`${SITE_URL}new/app/upload/banner/${item.banner_image}`} className="d-block w-100" alt={''} />
           </div>
-        </div>
-        <div className="carousel-item position-relative text-center">
-          <img src="assets/img/bg/laptop-office.jpg" className="d-block w-100" alt="pic" style={{ height: '200px' }} />
-          <div className="text-left"
-            style={{
-              position: 'absolute', top: '50%',
-              left: '20%', transform: 'translate(-20%, -50%)', zIndex: '1',
-            }}>
-            <div className="text-white" style={{ fontSize: '14px' }}>Learn From Basics</div>
-            <div className="text-white" style={{ fontSize: '20px', fontWeight: '600' }}>App Development</div>
-            <button className="button-56 mt-1" style={{fontWeight: '600'}}>Know More</button>
-          </div>
-        </div>
-        <div className="carousel-item position-relative text-center">
-          <img src="assets/img/bg/working-late.jpg" className="d-block w-100" alt="pic" style={{ height: '200px' }} />
-          <div className="text-left"
-            style={{
-              position: 'absolute', top: '50%',
-              left: '20%', transform: 'translate(-20%, -50%)', zIndex: '1',
-            }}>
-            <div className="text-white" style={{ fontSize: '14px' }}>Learn From Basics</div>
-            <div className="text-white" style={{ fontSize: '20px', fontWeight: '600' }}>Digital Marketing</div>
-            <button className="button-56 mt-1" style={{fontWeight: '600'}}>Know More</button>
-          </div>
-        </div>
-        <div className="carousel-item">
-          <img src="assets/img/bg/desktop.jpg" className="d-block w-100" alt="pic" style={{ height: '200px' }} />
-          <div className="text-left"
-            style={{
-              position: 'absolute', top: '50%',
-              left: '20%', transform: 'translate(-20%, -50%)', zIndex: '1',
-            }}>
-            <div className="text-white" style={{ fontSize: '14px' }}>Learn From Basics</div>
-            <div className="text-white" style={{ fontSize: '20px', fontWeight: '600' }}>Java Development</div>
-            <button className="button-56 mt-1" style={{fontWeight: '600'}}>Know More</button>
-          </div>
-        </div>
-
+        ))}
       </div>
       <button className="carousel-control-prev d-none" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -67,11 +31,6 @@ const HeroBanner = () => {
         <span className="visually-hidden">Next</span>
       </button>
     </div>
-
-
-
-
-
   );
 };
 

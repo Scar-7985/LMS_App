@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CardPopular from './CardPopular'
+import { CourseContext } from '../context/CourseContext'
+import { SITE_URL } from '../define/Define';
 
 const Search = (props) => {
 
-    // Fake Data
-    const [courseData, setCourseData] = useState([]);
-    // Fake Data
-
-
+    const { courseData } = useContext(CourseContext);
 
     const [showRecent, setShowRecent] = useState(false);
     const [searchData, setSearchData] = useState('');
@@ -122,7 +120,7 @@ const Search = (props) => {
                 {/* ======================== Courses ============================ */}
 
 
-                <div className="mt-5 row px-1">
+                <div className="mt-5 row m-0" style={{ width: '100vw' }}>
 
                     {
                         searchData.length > 0 ? (
@@ -132,17 +130,14 @@ const Search = (props) => {
                                 courseData.filter((item) =>
                                     item.program_name.toLowerCase().includes(searchData.toLowerCase())
                                 ).map((foundedItems) => (
-                                    <div className="col-6 mt-3" key={foundedItems.id}>
-                                        <Link
-                                            to={`/course-detail/${foundedItems.id}`}
-                                            style={{ textDecoration: 'none' }}
-                                            className="card shadow"
-                                        >
+                                   <div className="col-6 mt-1 p-2" key={foundedItems.id} style={{display: 'grid', placeItems: 'center'}}>
+                                                 <Link to={`/course-detail/${foundedItems.program_name}`} className='shadow text-decoration-none w-100'>
                                             <CardPopular
                                                 title={foundedItems.program_name}
                                                 category={foundedItems.category}
-                                                image={'assets/img/course/1.png'}
-                                                price={foundedItems.of_price}
+                                                image={`${SITE_URL}new/app/upload/course_img/${foundedItems.img}`}
+                                                of_price={foundedItems.of_price}
+                                                ac_price={foundedItems.ac_price}
                                             />
                                         </Link>
                                     </div>
@@ -182,7 +177,7 @@ const Search = (props) => {
                 }}
                 onClick={props.onClose}
             >
-                <ion-icon name="close-outline" style={{fontSize: '28px'}}></ion-icon>
+                <ion-icon name="close-outline" style={{ fontSize: '28px' }}></ion-icon>
             </div>
         </div>
     );

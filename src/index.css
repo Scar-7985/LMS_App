@@ -4830,9 +4830,9 @@ a.close.disabled {
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: -webkit-transform .6s ease-in-out;
-  transition: transform .6s ease-in-out;
-  transition: transform .6s ease-in-out,-webkit-transform .6s ease-in-out;
+  transition: -webkit-transform .6s;
+  transition: transform .6s;
+  transition: transform .6s,-webkit-transform .6s;
  }
 
 @media (prefers-reduced-motion: reduce) {
@@ -10863,4 +10863,14 @@ a.text-dark {
   .button-56 {
     padding: 0 40px;
   }
+}
+
+
+.slick-prev,
+.slick-next {
+  display: none !important; /* Hides the arrows completely */
+}
+
+.slick-slider {
+  padding: 0 !important; /* Removes any padding around the slider */
 }

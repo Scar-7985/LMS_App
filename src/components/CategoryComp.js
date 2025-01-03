@@ -17,7 +17,7 @@ const CategoryComp = () => {
 
   return (
     <>
-      <div className="slider-container px-1">
+      <div className="slider-container px-1 w-100">
         <Slider {...settings}>
           <div>
             <button type="button" className="btn text-white d-flex justify-content-center" style={{ backgroundColor: '#ff0000', width: '100px', fontSize: '14px', padding: '0 4px' }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-briefcase-fill" viewBox="0 0 16 16">
