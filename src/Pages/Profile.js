@@ -1,21 +1,26 @@
 import { Link, useNavigate } from "react-router-dom"
 import secureLocalStorage from "react-secure-storage"
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Profile = () => {
 
     const navigate = useNavigate();
     const LogOut = () => {
+        toast.success("Logged Out Successfully")
         // secureLocalStorage.removeItem("login_id");
-        window.localStorage.removeItem("login_id");
-        navigate('/');
+        setTimeout(() => {
+            window.localStorage.removeItem("login_id");
+            navigate('/');
+            window.location.reload();
+        }, 2000);
     }
 
 
     return (
         <>
 
-
-            <div id="appCapsule">
+            <div id="appCapsule" className="pt-4">
 
                 <div className="section mt-3 text-center">
                     <div className="avatar-section d-flex flex-column">
@@ -23,15 +28,14 @@ const Profile = () => {
                             <img src="/assets/img/sample/avatar/avatar.png" alt="avatar" className="" style={{ width: '50px', borderRadius: '50%' }} />
                         </div>
                         <div>
-                            <p className='m-0' style={{ color: 'black', fontWeight: '500' }}>{'Nikhil'}</p>
+                            <p className='mt-2 mb-0' style={{ color: 'black', fontWeight: '500' }}>{'Nikhil'}</p>
                             <p className='m-0' style={{ fontSize: '12px' }}><span>+91</span> {'2364626426'}</p>
                         </div>
                     </div>
                 </div>
 
 
-                <div className="listview-title mt-1">Profile Settings</div>
-                <ul className="listview image-listview text">
+                <ul className="listview image-listview text mt-5">
 
                     <li>
                         <Link style={{ textDecoration: 'none' }} to='/update-profile' className="item">

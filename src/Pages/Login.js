@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CourseContext } from '../context/CourseContext'
 import { SITE_URL } from '../define/Define';
 import secureLocalStorage from 'react-secure-storage';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -32,10 +33,11 @@ const Login = () => {
             .then(response => {
 
                 if (response.data.status === 101) {
-                    console.log('response.msg => ', response.data.msg);
+                    toast.error(response.data.msg);
+                    setIsSubmitting(false);
                 }
                 else if (response.data.status === 102) {
-                    console.log('response.msg => ', response.data.msg);
+                    toast.success(response.data.msg)
                     setOtpSent(true);
                     setReadOnly(true)
                     setIsSubmitting(false);
@@ -57,14 +59,20 @@ const Login = () => {
 
                 }
                 else if (response.data.status === 100) {
-                    if (otpTimerRef.current) {  // Safely clear the timer when login is successful
-                        otpTimerRef.current.innerHTML = '';
-                    }
-                    console.log('response.msg => ', response);
-                    setIsSubmitting(false);
-                    const login_id = response.data.login;
-                    window.localStorage.setItem('login_id', login_id);
-                    navigate('/');
+                    toast.success(response.data.msg)
+                    console.log("response => ", response);
+
+                    setTimeout(() => {
+                        if (otpTimerRef.current) {  // Safely clear the timer when login is successful
+                            otpTimerRef.current.innerHTML = '';
+                        }
+                        setIsSubmitting(false);
+                        const login_id = response.data.login;
+                        window.localStorage.setItem('login_id', login_id);
+                        navigate('/');
+                        window.location.reload();
+                    }, 1500);
+
                 }
 
             })

@@ -1,6 +1,23 @@
+import { useState } from "react";
 
 
 const UpdateProfile = () => {
+
+    const [formData, setFormData] = useState({
+        u_name: '',
+        u_email: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        console.log(formData);
+
+    }
 
     return (
         <>
@@ -23,7 +40,7 @@ const UpdateProfile = () => {
                             <img
                                 className="imaged rounded"
                                 src={"/assets/img/sample/avatar/avatar.png"}
-                                style={{height: '100px', width: '100px'}}
+                                style={{ height: '100px', width: '100px' }}
                             />
                             <label htmlFor='changeImage'
                                 className="button"
@@ -47,13 +64,17 @@ const UpdateProfile = () => {
                 <div className="section full mt-1 mb-2">
                     <div className="wide-block pt-2 pb-3">
 
-                        <div>
+                        <form onSubmit={handleUpdate}>
                             <div className="form-group boxed">
                                 <div className="input-wrapper">
                                     <label className="label" htmlFor="name5">Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
+                                        placeholder="Your name"
+                                        name="u_name"
+                                        value={formData.u_name}
+                                        onChange={handleChange}
                                     />
                                     <ion-icon name="create"
                                         style={{ fontSize: '20px', display: 'none' }}
@@ -65,9 +86,12 @@ const UpdateProfile = () => {
                                 <div className="input-wrapper">
                                     <label className="label" htmlFor="email5">E-mail</label>
                                     <input
-                                        type="email"
+                                        type="text"
                                         className="form-control" id="email5"
                                         placeholder="E-mail address"
+                                        name="u_email"
+                                        value={formData.u_email}
+                                        onChange={handleChange}
                                     />
                                     <button
                                         style={{ display: 'none' }}
@@ -76,21 +100,21 @@ const UpdateProfile = () => {
                                 </div>
                             </div>
 
-                            <div className="form-group boxed">
+                            {/* <div className="form-group boxed">
                                 <div className="input-wrapper">
                                     <label className="label" htmlFor="password5">Date Of Birth</label>
                                     <input type="date" className="form-control" id="password5" />
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="form-group boxed mt-3 pb-0">
                                 <div className="input-wrapper">
-                                    <button className='btn btn-warning text-white w-100'
+                                    <button type="submit" className='btn btn-warning text-white w-100'
                                     >Update</button>
                                 </div>
                             </div>
 
-                        </div>
+                        </form>
 
                     </div>
                 </div>

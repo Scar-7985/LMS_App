@@ -20,6 +20,9 @@ import MyOrders from './Pages/MyOrders';
 import LegalTerms from './Pages/LegalTerms';
 import Support from './Pages/Support';
 import NonProtectedRoute from './components/NonProtectedRoute';
+import { ToastContainer } from 'react-toastify';
+import NotificationDetails from './Pages/NotificationDetails';
+import Checkout from './Pages/Checkout';
 
 const App = () => {
 
@@ -29,6 +32,19 @@ const App = () => {
   return (
     <div style={{ padding: '56px 0 0 0', width: '100vw' }}>
       <ScrollToTop />
+      <ToastContainer
+        // className='text-center'
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+      />
       <Routes>
 
         {/* ================== Non-Protected Routes Starts ================== */}
@@ -85,6 +101,12 @@ const App = () => {
         {/* ================= Protected Routes Starts ================= */}
 
         <Route element={<ProtectedRoutes />}>
+          <Route path='/checkout/:checkoutId' element={
+            <>
+              <Header profile={true} title={'Checkout'} showSearch={false} />
+              <Checkout />
+            </>
+          } />
           <Route path='/video/:getVideoId' element={
             <>
               <VideoPlayer />
@@ -112,6 +134,12 @@ const App = () => {
             <>
               <Header goBackTo={'/profile'} title={'Notification'} showSearch={false} />
               <Notification />
+            </>
+          } />
+          <Route path='/notification-detail/:notificationId' element={
+            <>
+              <Header goBackTo={'/notification'} title={'Notification Details'} showSearch={false} />
+              <NotificationDetails />
             </>
           } />
           <Route path='/my-orders' element={
