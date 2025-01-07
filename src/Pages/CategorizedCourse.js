@@ -1,14 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import CardPopular from '../components/CardPopular'
 import { CourseContext } from '../context/CourseContext'
 import Header from '../components/Header'
+import axios from 'axios'
+import { SITE_URL } from '../define/Define'
 
 const CategorizedCourse = () => {
 
     const { courseType } = useParams();
     // Courses Data
-    const { courseCategory, courseData } = useContext(CourseContext);
+    const { courseData } = useContext(CourseContext);
+
+    const [courseCategory, setCourseCategory] = useState([])
+
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const response = await axios.get(`${SITE_URL}new/app/api/get_category.php`);
+                const data = response.data;
+                setCourseCategory(data);
+            } catch (error) {
+
+            }
+        }
+
+        fetchCategory();
+    }, [])
 
     // Show specific courses of the selected category
     const selectedCategory = courseCategory.find((item) => item.ser_title === courseType)?.id;

@@ -69,7 +69,7 @@ const Login = () => {
                         setIsSubmitting(false);
                         const login_id = response.data.login;
                         window.localStorage.setItem('login_id', login_id);
-                        navigate('/');
+                        navigate('/profile');
                         window.location.reload();
                     }, 1500);
 
@@ -109,6 +109,7 @@ const Login = () => {
     const resendOtp = () => {
         setShowResend(false);
         setOtpSent(false);
+        document.querySelector('#otpBtn').click();
     };
 
     return (
@@ -167,6 +168,7 @@ const Login = () => {
 
                             <div className="form-button-group p-0 mt-4">
                                 <button
+                                id='otpBtn'
                                     type="submit"
                                     className="btn btn-primary btn-block"
                                     style={{ height: '40px' }}
@@ -190,16 +192,6 @@ const Login = () => {
                                     </div>
                                 }
                             </div>
-
-                            {
-                                !otpSent &&
-                                <div className="form-links mt-1">
-                                    <div>
-                                        <Link style={{ textDecoration: 'none' }} to='/registration'>Register Now</Link>
-                                    </div>
-                                    <div><Link to='#' className="text-danger" style={{ textDecoration: 'none', fontWeight: '500' }}>Forgot Password?</Link></div>
-                                </div>
-                            }
 
                         </form>
                     </div>

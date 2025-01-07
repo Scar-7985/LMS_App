@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { CourseContext } from '../context/CourseContext';
 import VideoCard from '../components/VideoCard';
@@ -34,7 +34,12 @@ const CourseDetail = () => {
 
     const [showInfoType, setShowInfoType] = useState('About');
 
-    
+    const navigate = useNavigate();
+    const goToPDF = (invidP) => {
+        navigate("/course_pdf",
+          // { state: { invid: invidP } }
+        );
+      }
 
     return (
         <>
@@ -218,7 +223,9 @@ const CourseDetail = () => {
                                         ) : (
                                             <div className='row'>
                                                 <div className="col-12 mt-1">
-                                                    <div className="card shadow">
+                                                    <div className="card shadow" 
+                                                    onClick={goToPDF}
+                                                    style={{cursor: 'pointer'}}>
                                                         <div className="card-body d-flex align-items-center">
                                                             <img src="/assets/img/pdf_icon.png" style={{ width: '50px' }} alt="" />
                                                             <div className='px-2'>

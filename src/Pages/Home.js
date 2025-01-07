@@ -39,7 +39,7 @@ const Home = () => {
             <div className="section mt-4 border-bottom">
                 <div className="section-heading">
                     <h2 className="title">Trending Courses</h2>
-                    <Link style={{ textDecoration: 'none' }} to='/popular-course' className="link">See all</Link>
+                    <Link style={{ textDecoration: 'none' }} to='/trending-course' className="link">See all</Link>
                 </div>
             </div>
 

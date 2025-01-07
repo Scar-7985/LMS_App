@@ -22,7 +22,7 @@ const Header = ({ title, profile = false, goBackTo, showSearch = false, rightSec
 
 
                 {profile ? (
-                    <Link to='/profile-setting' className="headerButton">
+                    <Link to='/' className="headerButton">
                         <img src={isAuthenticated ? "/assets/img/sample/avatar/avatar.png" : "/assets/img/sample/avatar/avatar.png"} alt="image" className="imaged rounded w32" />
                     </Link>
                 ) : (

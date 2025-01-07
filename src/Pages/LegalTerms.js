@@ -7,7 +7,7 @@ const LegalTerms = () => {
 
     const [termCondition, setTermsCondition] = useState([])
 
-    
+
 
     useEffect(() => {
         const fetchTermsCondition = async () => {
@@ -28,9 +28,9 @@ const LegalTerms = () => {
 
             {
                 termCondition.length > 0 ? (
-                    termCondition.map((item) => {
+                    termCondition.map((item, index) => {
                         return (
-                            <div className="section mt-2 mb-3">
+                            <div className="section mt-2 mb-3" key={index}>
                                 <div className="card shadow">
                                     <div className="card-body">
                                         {/* <h2 className="card-title">Condition of Attending</h2> */}

@@ -25,6 +25,9 @@ import NotificationDetails from './Pages/NotificationDetails';
 import Checkout from './Pages/Checkout';
 import Quiz from './Pages/Quiz';
 import InvoiceView from './Pages/InvoiceView';
+import QuizCategory from './Pages/QuizCategory';
+import TrendingCourse from './components/TrendingCourse';
+import CoursePDF from './Pages/CoursePDF';
 
 const App = () => {
 
@@ -87,14 +90,14 @@ const App = () => {
 
         <Route path='/recommended-course' element={
           <>
-            <Header profile={true} title={'Recommended Courses'} showSearch={true} />
+            <Header profile={false} goBackTo={'/course'} title={'Recommended Courses'} showSearch={true} />
             <RecommendCourse />
           </>
         } />
         <Route path='/trending-course' element={
           <>
-            <Header profile={true} title={'Trending Courses'} showSearch={true} />
-            <RecommendCourse />
+            <Header profile={false} goBackTo={'/course'} title={'Trending Courses'} showSearch={true} />
+            <TrendingCourse />
           </>
         } />
 
@@ -122,6 +125,17 @@ const App = () => {
           <Route path='/quiz' element={
             <>
               <Quiz />
+            </>
+          } />
+          <Route path='/quiz-category' element={
+            <>
+              <Header profile={true} title={'Quiz Category'} showSearch={false} />
+              <QuizCategory />
+            </>
+          } />
+          <Route path='/course_pdf' element={
+            <>
+              <CoursePDF />
             </>
           } />
           <Route path='/my-courses' element={

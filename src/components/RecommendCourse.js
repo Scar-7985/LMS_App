@@ -13,7 +13,7 @@ const RecommendCourse = () => {
 
 
     return (
-        <div className="pt-0">
+        <div className="" style={{paddingBottom: '100px'}}>
             {
                 courseData.length > 0 ? (
                     courseData.map((item) => (

@@ -8,13 +8,14 @@ const UpdateProfile = () => {
 
     const [formData, setFormData] = useState({
         login_id: window.localStorage.getItem("login_id") || "",
-        uname: "",
+        uname: "User",
+        phone: "2222444466",
         email: "",
         address: "",
-        phone: "",
     });
 
     useEffect(() => {
+
         fetchDetails();
     }, []);
 

@@ -170,14 +170,14 @@ const Search = (props) => {
                     left: '0',
                     right: '0',
                     height: '8%',
-                    opacity: '0.4',
+                    opacity: '0.8',
                     display: 'grid',
                     placeItems: 'center',
                     cursor: 'pointer',
                 }}
                 onClick={props.onClose}
             >
-                <ion-icon name="close-outline" style={{ fontSize: '28px' }}></ion-icon>
+                <ion-icon name="close-outline" style={{ fontSize: '40px' }}></ion-icon>
             </div>
         </div>
     );

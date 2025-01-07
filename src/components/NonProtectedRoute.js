@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { isAuthenticated } from '../define/Define';
 
 const NonProtectedRoute = () => {
-    return isAuthenticated ? <Navigate to="/" /> : <Outlet />;
+    return isAuthenticated ? <Navigate to="/profile" /> : <Outlet />;
 };
 
 export default NonProtectedRoute;

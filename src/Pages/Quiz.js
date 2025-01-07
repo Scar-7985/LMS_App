@@ -104,7 +104,8 @@ const Quiz = () => {
     return (
         <>
             <Header
-                profile={true}
+                profile={false}
+                goBackTo={'/quiz-category'}
                 title={'Quiz'}
                 showSearch={false}
                 rightSec={
@@ -146,7 +147,7 @@ const Quiz = () => {
                                         <label
                                             key={index}
                                             className="option-check form-check border pl-4 py-3 rounded shadow-sm"
-                                            style={{cursor: 'pointer'}}
+                                            style={{ cursor: 'pointer' }}
                                         >
                                             <input
                                                 className="form-check-input"

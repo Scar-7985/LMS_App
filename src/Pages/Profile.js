@@ -1,11 +1,41 @@
 import { Link, useNavigate } from "react-router-dom"
-import secureLocalStorage from "react-secure-storage"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { SITE_URL } from "../define/Define";
 
 const Profile = () => {
 
     const navigate = useNavigate();
+
+    const [userData, setUserData] = useState({
+        login_id: window.localStorage.getItem("login_id") || "",
+        uname: "User",
+        phone: "2222444466",
+    });
+
+
+    useEffect(() => {
+
+        fetchDetails();
+    }, []);
+    const fetchDetails = async () => {
+        try {
+            const response = await axios.post(`${SITE_URL}new/app/api/get_profile.php`, {
+                login_id: userData.login_id,
+            });
+            const data = response.data;
+
+            setUserData({
+                login_id: userData.login_id,
+                uname: data.name || "",
+                phone: data.phone || "",
+            });
+        } catch (error) {
+            console.error("Error fetching details:", error);
+        }
+    };
+
     const LogOut = () => {
         toast.success("Logged Out Successfully")
         // secureLocalStorage.removeItem("login_id");
@@ -28,8 +58,10 @@ const Profile = () => {
                             <img src="/assets/img/sample/avatar/avatar.png" alt="avatar" className="" style={{ width: '50px', borderRadius: '50%' }} />
                         </div>
                         <div>
-                            <p className='mt-2 mb-0' style={{ color: 'black', fontWeight: '500' }}>{'Nikhil'}</p>
-                            <p className='m-0' style={{ fontSize: '12px' }}><span>+91</span> {'2364626426'}</p>
+                            <p className='mt-2 mb-0' style={{ color: 'black', fontWeight: '500' }}>
+                                {userData.uname}</p>
+                            <p className='m-0' style={{ fontSize: '12px' }}><span>+91 </span>
+                                {userData.phone}</p>
                         </div>
                     </div>
                 </div>

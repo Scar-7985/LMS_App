@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Header from '../components/Header';
 
-const InvoiceView = () => {
+const CoursePDF = () => {
     const UploadUrl = 'https://fakeurl.com/';
     const companyDetails = {
         logo: 'logo.png',
@@ -25,7 +25,7 @@ const InvoiceView = () => {
     };
 
     const data = [
-        { quantity: 2, title: 'Product A', description: 'Description of Product A', rate: '500.00', amount: '1000.00' },
+        { quantity: 1, title: 'Product A', description: 'Description of Product A', rate: '500.00', amount: '1000.00' },
     ];
 
     const getInvoiceSum = {
@@ -60,7 +60,7 @@ const InvoiceView = () => {
 
     return (
         <>
-            <Header goBackTo={'/my-orders'} title={'Invoice View'} showSearch={false} rightSec={
+            <Header goBackTo={'/course'} title={'PDF View'} showSearch={false} rightSec={
                 <div
                     onClick={handlePrint}
                     className="avatar avatar-icon avatar-lg avatar-cyan rounded"
@@ -85,8 +85,8 @@ const InvoiceView = () => {
                     <div className="card-body">
                         <div id="invoice" className="">
                             <div className="d-flex justify-content-between">
-                                <div style={{width: '140px'}}>
-                                    <img src={'/assets/img/sample/brand/brand.png'} alt="logo" style={{width: '100%', height: '100%'}} />
+                                <div style={{ width: '140px' }}>
+                                    <img src={'/assets/img/sample/brand/brand.png'} alt="logo" style={{ width: '100%', height: '100%' }} />
                                 </div>
                                 <div style={{
                                     position: "absolute",
@@ -96,7 +96,7 @@ const InvoiceView = () => {
                                     opacity: '0.2',
                                     width: '140px'
                                 }}>
-                                    <img src={'/assets/img/sample/brand/brand.png'} alt="logo" style={{width: '100%', height: '100%'}} />
+                                    <img src={'/assets/img/sample/brand/brand.png'} alt="logo" style={{ width: '100%', height: '100%' }} />
                                 </div>
                                 <div>
                                     <div className="invoice-id">{invoiceDetail.invoiceId}</div>
@@ -256,4 +256,4 @@ const InvoiceView = () => {
     )
 }
 
-export default InvoiceView
+export default CoursePDF
