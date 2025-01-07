@@ -1,12 +1,27 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 import { SITE_URL } from "../define/Define.js";
-import { CourseContext } from '../context/CourseContext.js';
+import axios from "axios";
 
 const HeroBanner = () => {
-  const { bannerData } = useContext(CourseContext);
-  // console.log('banner => ', bannerData.filter((item) => item.status === 1));
+
+
+  const [bannerData, setBannerData] = useState([])
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const response = await axios.get(`${SITE_URL}new/app/api/get_banner.php`);
+        const data = response.data;
+        setBannerData(data);
+      } catch (error) {
+
+      }
+    }
+
+    fetchBanner();
+  }, [])
 
 
   return (

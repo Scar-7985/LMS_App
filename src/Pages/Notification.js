@@ -1,11 +1,26 @@
-import { useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CourseContext } from "../context/CourseContext";
+import axios from "axios";
+import { SITE_URL } from "../define/Define";
 
 
 const Notification = () => {
 
-    const { notification } = useContext(CourseContext);
+    const [notification, setNotification] = useState([]);
+
+    useEffect(() => {
+        const fetchNotificaton = async () => {
+            try {
+                const response = await axios.get(`${SITE_URL}new/app/api/notification.php`);
+                const data = response.data;
+                setNotification(data);
+            } catch (error) {
+
+            }
+        }
+
+        fetchNotificaton();
+    }, [])
 
     return (
         <>

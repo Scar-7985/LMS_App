@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CourseContext } from '../context/CourseContext'
+import axios from "axios";
 import { SITE_URL } from "../define/Define";
 
 const Course = () => {
 
-  const { courseCategory } = useContext(CourseContext);
-  // console.log(courseCategory);
+  const [ courseCategory, setCourseCategory ] = useState([]) 
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const response = await axios.get(`${SITE_URL}new/app/api/get_category.php`);
+        const data = response.data;
+        setCourseCategory(data);
+      } catch (error) {
+  
+      }
+    }
+
+    fetchCategory();
+  }, [])
+
 
 
   return (
