@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Search from "./Search";
 import { isAuthenticated } from "../define/Define";
 
-const Header = ({ title, profile = false, goBackTo, showSearch = false }) => {
+const Header = ({ title, profile = false, goBackTo, showSearch = false, rightSec }) => {
 
     const currentProfilePic = '';
 
@@ -49,7 +49,7 @@ const Header = ({ title, profile = false, goBackTo, showSearch = false }) => {
                             <ion-icon name="search" style={{ fontSize: '24px' }}></ion-icon>
                         </div>
                     ) : (
-                        <div> </div>
+                        <div className="" style={{display: 'grid', placeItems: 'center'}}>{rightSec}</div>
                     )
                 }
 

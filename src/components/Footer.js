@@ -1,42 +1,36 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
-
     const location = useLocation();
-    const Pathname = location.pathname;
+    const Pathname = useMemo(() => location.pathname, [location.pathname]);
 
+    // Define menu items dynamically
+    const menuItems = [
+        { path: '/', icon: 'home', label: 'Home' },
+        { path: '/course', icon: 'play', label: 'Courses' },
+        { path: '/my-courses', icon: 'book', label: 'My Courses' },
+        { path: '/profile', icon: 'person', label: 'Profile' },
+    ];
 
     return (
-        <>
-            <div className="appBottomMenu">
-                <Link style={{ textDecoration: 'none' }} to="/" className={`item ${Pathname === '/' ? 'active' : ''}`}>
+        <div className="appBottomMenu">
+            {menuItems.map((item) => (
+                <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`item ${Pathname === item.path ? 'active' : ''}`}
+                    aria-label={item.label}
+                    style={{ textDecoration: 'none' }}
+                >
                     <div className="col">
-                        <ion-icon name="home"></ion-icon>
-                        <strong>Home</strong>
+                        <ion-icon name={item.icon}></ion-icon>
+                        <strong>{item.label}</strong>
                     </div>
                 </Link>
-                <Link style={{ textDecoration: 'none' }} to='/course' className={`item ${Pathname === '/course' ? 'active' : ''}`}>
-                    <div className="col">
-                        <ion-icon name="play"></ion-icon>
-                        <strong>Courses</strong>
-                    </div>
-                </Link>
-                <Link style={{ textDecoration: 'none' }} to={'/my-courses'} className={`item ${Pathname === '/my-courses' ? 'active' : ''}`}>
-                    <div className="col">
-                        <ion-icon name="book"></ion-icon>
-                        <strong>My Courses</strong>
-                    </div>
-                </Link>
-                <Link style={{ textDecoration: 'none' }} to={'/profile'} className={`item ${Pathname === '/profile' ? 'active' : ''}`}>
-                    <div className="col">
-                        <ion-icon name="person"></ion-icon>
-                        <strong>Profile</strong>
-                    </div>
-                </Link>
-            </div>
-        </>
-    )
-}
+            ))}
+        </div>
+    );
+};
 
-export default Footer
+export default Footer;

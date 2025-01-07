@@ -23,6 +23,7 @@ import NonProtectedRoute from './components/NonProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import NotificationDetails from './Pages/NotificationDetails';
 import Checkout from './Pages/Checkout';
+import Quiz from './Pages/Quiz';
 
 const App = () => {
 
@@ -110,6 +111,11 @@ const App = () => {
           <Route path='/video/:getVideoId' element={
             <>
               <VideoPlayer />
+            </>
+          } />
+          <Route path='/quiz' element={
+            <>
+              <Quiz />
             </>
           } />
           <Route path='/my-courses' element={
