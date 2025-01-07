@@ -42,7 +42,7 @@ const CourseDetail = () => {
 
             {
                 filteredCourse ? (
-                    <div key={filteredCourse.id}>
+                    <div  key={filteredCourse.id} style={{width: '100vw'}}>
 
                         <div className="section full bg-white">
                             <div className="subscribe bg-white shadow-lg" style={{ height: '50px' }}>
@@ -91,7 +91,7 @@ const CourseDetail = () => {
                             </div>
                         </div>
 
-                        <div className="section bg-white row px-2 pt-4">
+                        <div className="section bg-white row px-2 pt-4 w-100">
                             <div
                                 className={`col-4 text-center ${showInfoType === 'About' ? 'description' : ''}`}
                                 onClick={() => setShowInfoType('About')}

@@ -24,6 +24,7 @@ import { ToastContainer } from 'react-toastify';
 import NotificationDetails from './Pages/NotificationDetails';
 import Checkout from './Pages/Checkout';
 import Quiz from './Pages/Quiz';
+import InvoiceView from './Pages/InvoiceView';
 
 const App = () => {
 
@@ -102,6 +103,11 @@ const App = () => {
         {/* ================= Protected Routes Starts ================= */}
 
         <Route element={<ProtectedRoutes />}>
+          <Route path='/invoice-view' element={
+            <>
+              <InvoiceView />
+            </>
+          } />
           <Route path='/checkout/:checkoutId' element={
             <>
               <Header profile={true} title={'Checkout'} showSearch={false} />
