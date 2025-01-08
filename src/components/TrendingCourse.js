@@ -10,7 +10,7 @@ const TrendingCourse = () => {
   const { courseData } = useContext(CourseContext);
 
   return (
-    <div className="row m-0" style={{ width: '100vw', paddingBottom: '100px' }}>
+    <div className="row m-0" style={{ width: '100vw', paddingBottom: '80px' }}>
 
       {
         courseData.map((item, index) => {

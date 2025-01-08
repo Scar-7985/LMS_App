@@ -9,7 +9,7 @@ const Home = () => {
 
     return (
 
-        <div className='bg-white' style={{ padding: '0 0 80px 0', width: '100vw' }}>
+        <div className='bg-white' style={{ width: '100vw' }}>
 
             <HeroBanner />
             <div className="section my-4 border-bottom">
@@ -31,19 +31,22 @@ const Home = () => {
             </div>
 
 
-            <div className="section">
+            <div className="section mt-4">
                 <RecommendCourse />
             </div>
 
 
-            <div className="section mt-4 border-bottom">
+            <div className="section border-bottom">
                 <div className="section-heading">
                     <h2 className="title">Trending Courses</h2>
                     <Link style={{ textDecoration: 'none' }} to='/trending-course' className="link">See all</Link>
                 </div>
             </div>
 
-            <TrendingCourse />
+            <div className="mt-4">
+                <TrendingCourse />
+            </div>
+
         </div>
     );
 }

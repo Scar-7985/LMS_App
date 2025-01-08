@@ -1,15 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { CourseContext } from "../context/CourseContext";
+import axios from 'axios';
+import { SITE_URL } from '../define/Define';
 
 const NotificationDetails = () => {
 
-    const { notification } = useContext(CourseContext);
+    const [notification, setNotification] = useState([]);
     const { notificationId } = useParams();
 
+
+    useEffect(() => {
+        const fetchNotificaton = async () => {
+            try {
+                const response = await axios.get(`${SITE_URL}new/app/api/notification.php`);
+                const data = response.data;
+                setNotification(data);
+            } catch (error) {
+
+            }
+        }
+
+        fetchNotificaton();
+    }, [])
+
+
     const filteredNotification = notification.find((item) => Number(item.id) === Number(notificationId));
-
-
+ 
 
     return (
         <div id="appCapsule" className="full-height pt-3">
@@ -35,7 +51,7 @@ const NotificationDetails = () => {
                     </div>
                 ) : (
                     <div className='text-center py-5'>
-                        <div class="spinner-border text-success" role="status"></div>
+                        <div className="spinner-border text-success" role="status"></div>
                     </div>
                 )
             }

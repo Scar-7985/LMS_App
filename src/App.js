@@ -182,7 +182,6 @@ const App = () => {
           } />
           <Route path='/support' element={
             <>
-              <Header goBackTo={'/profile'} title={'Support'} showSearch={false} />
               <Support />
             </>
           } />

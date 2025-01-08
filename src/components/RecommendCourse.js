@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CardList from './CardList';
-import axios from 'axios';
 import { CourseContext } from '../context/CourseContext'
 import { SITE_URL } from '../define/Define';
 
@@ -13,7 +12,7 @@ const RecommendCourse = () => {
 
 
     return (
-        <div className="" style={{paddingBottom: '100px'}}>
+        <div className="" style={{ paddingBottom: '80px' }}>
             {
                 courseData.length > 0 ? (
                     courseData.map((item) => (

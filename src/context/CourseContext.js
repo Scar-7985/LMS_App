@@ -7,11 +7,6 @@ const CourseProvider = ({ children }) => {
 
     const [courseData, setCourseData] = useState([]);
     const [videoData, setVideoData] = useState([]);
-    const [bannerData, setBannerData] = useState([]);
-    const [courseCategory, setCourseCategory] = useState([]);
-    const [notification, setNotification] = useState([]);
-    const [termCondition, setTermsCondition] = useState([]);
-    const [head, setHead] = useState([]);
 
     // console.log(courseData);
     // console.log(head);

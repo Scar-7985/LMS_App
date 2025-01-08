@@ -60,7 +60,7 @@ const Login = () => {
                 }
                 else if (response.data.status === 100) {
                     toast.success(response.data.msg)
-                    console.log("response => ", response);
+                    // console.log("response => ", response);
 
                     setTimeout(() => {
                         if (otpTimerRef.current) {  // Safely clear the timer when login is successful
@@ -114,8 +114,8 @@ const Login = () => {
 
     return (
         <div className='px-2 bg-white' style={{ width: '100vw', height: 'calc(100vh - 116px)' }}>
-            <div className="section w-100" style={{ overflow: 'hidden', height: 'calc(100vh - 500px)' }}>
-                <img className='' src="/assets/img/bg/Mobile-login.jpg" style={{ transform: 'scale(1.4)', width: '100%', height: '100%' }} alt="" />
+            <div className="section my-3 w-100" style={{ overflow: 'hidden', height: 'calc(100vh - 500px)' }}>
+                <img className='' src="/assets/img/bg/register.jpg" style={{ transform: 'scale(1.4)', width: '100%', height: '100%' }} alt="" />
             </div>
 
             <div className="section text-center bg-white">
