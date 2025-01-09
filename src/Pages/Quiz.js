@@ -5,11 +5,12 @@ import axios from 'axios';
 const Quiz = () => {
     const [quizData, setQuizData] = useState([]);
     const [questNumber, setQuestNumber] = useState(0);
-    const [timer, setTimer] = useState(30);
+    const [timer, setTimer] = useState(10);
     const [answers, setAnswers] = useState([]);
     const [timerRunning, setTimerRunning] = useState(true);
     const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [result, setResult] = useState(null);
+    const [disableButton, setDisableButton] = useState(false);
 
     let interval;
 
@@ -56,20 +57,18 @@ const Quiz = () => {
         }
 
         if (questNumber < quizData.length - 1) {
-            nextQuestion();
+            setDisableButton(true)
         } else {
-            handleSubmit();
+            // handleSubmit();
         }
     };
 
     const nextQuestion = () => {
         setQuestNumber((prev) => prev + 1);
-        setTimer(30); // Reset timer for the next question
     };
 
     const prevQuestion = () => {
         setQuestNumber((prev) => prev - 1);
-        setTimer(30); // Reset timer for the previous question
     };
 
     const handleAnswerChange = (e) => {
@@ -171,30 +170,31 @@ const Quiz = () => {
                                 onClick={prevQuestion}
                                 className="btn btn-outline-danger d-flex align-items-center"
                                 style={{ height: '40px' }}
-                                disabled={questNumber === 0}
+                                disabled={questNumber === 0 || disableButton}
                             >
                                 <ion-icon name="arrow-back-outline"></ion-icon>
                                 <span className='ml-1'>Previous</span>
                             </button>
 
-                            {questNumber === quizData.length - 1 ? (
-                                <button
-                                    onClick={handleSubmit}
-                                    className="btn btn-success"
-                                    style={{ height: '40px' }}
-                                >
-                                    Submit Quiz
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={nextQuestion}
-                                    className="btn btn-outline-success d-flex align-items-center"
-                                    style={{ height: '40px' }}
-                                >
-                                    <span className='mr-1'>Next</span>
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </button>
-                            )}
+
+                            <button
+                                className="btn btn-success"
+                                style={{ height: '40px' }}
+                                data-toggle="modal" data-target="#DialogBasic"
+                            >
+                                Submit Quiz
+                            </button>
+
+                            <button
+                                onClick={nextQuestion}
+                                className="btn btn-outline-success d-flex align-items-center"
+                                style={{ height: '40px' }}
+                                disabled={disableButton}
+                            >
+                                <span className='mr-1'>Next</span>
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                            </button>
+
                         </div>
                     </div>
                 ) : quizSubmitted ? (
@@ -210,6 +210,37 @@ const Quiz = () => {
                         <div className="spinner-border text-success" role="status"></div>
                     </div>
                 )}
+            </div>
+
+            {/* Submit Confirmation Toast */}
+
+            <div id="appCapsule">
+
+                <div className="modal fade dialogbox" id="DialogBasic" data-backdrop="static" tabIndex="-1" role="dialog">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title d-flex align-items-center">
+                                    <span>
+                                        Submit Quiz
+                                    </span>
+                                </h5>
+                            </div>
+                            <div className="modal-body">
+                            Are you sure you want to Submit ?
+                            </div>
+                            <div className="modal-footer">
+                                <div className="btn-inline align-item-center">
+                                    <div className="btn btn-text-secondary py-3"
+                                        data-dismiss="modal"
+                                        style={{ cursor: 'pointer', fontWeight: '500' }}>Cancel</div>
+                                    <div className="btn btn-text-primary py-3" data-dismiss="modal" style={{ cursor: 'pointer', fontWeight: '500' }}
+                                        onClick={handleSubmit}>OK</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );
