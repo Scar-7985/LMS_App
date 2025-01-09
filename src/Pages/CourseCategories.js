@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { SITE_URL } from "../define/Define";
 
-const Course = () => {
+const CourseCategories = () => {
 
-  const [ courseCategory, setCourseCategory ] = useState([]) 
+  const [courseCategory, setCourseCategory] = useState([])
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -14,7 +14,7 @@ const Course = () => {
         const data = response.data;
         setCourseCategory(data);
       } catch (error) {
-  
+
       }
     }
 
@@ -33,7 +33,7 @@ const Course = () => {
                 className="col-6 d-flex flex-column px-1 mt-3"
                 key={item.id}>
                 <Link
-                  to={`/course_category/${item.ser_title}`}
+                  to={`/course_type/${item.ser_title}`}
                   className="border border-2 shadow" style={{ height: '200px', borderTopLeftRadius: '8px', borderTopRightRadius: '8px', overflow: 'hidden', textDecoration: 'none' }}>
                   <img src={`${SITE_URL}new/app/upload/category_img/${item.image}`} alt="img" className="" style={{ width: '100%', height: '60%' }} />
                   <div className="pt-2" style={{ height: '40%' }}>
@@ -61,4 +61,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default CourseCategories;

@@ -2,17 +2,18 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Header from '../components/Header';
 import axios from 'axios';
 
-const Quiz = () => {
+const QuizGame = () => {
+
     const [quizData, setQuizData] = useState([]);
     const [questNumber, setQuestNumber] = useState(0);
-    const [timer, setTimer] = useState(10);
     const [answers, setAnswers] = useState([]);
-    const [timerRunning, setTimerRunning] = useState(true);
     const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [result, setResult] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(60);
     const [disableButton, setDisableButton] = useState(false);
 
-    let interval;
+    console.log(timeLeft);
+
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -29,39 +30,20 @@ const Quiz = () => {
         };
 
         fetchQuestions();
+
+        // ============================================ //
+
+
+
     }, []);
 
-    useEffect(() => {
-        if (timer === 0 || !timerRunning) {
-            clearInterval(interval);
-            handleTimeout();
-            return;
-        }
 
-        interval = setInterval(() => {
-            setTimer((prev) => prev - 1);
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [timer, timerRunning]);
 
     const filteredQuestion = useMemo(() => {
         return quizData.length > 0 ? quizData[questNumber] : null;
     }, [quizData, questNumber]);
 
-    const handleTimeout = () => {
-        if (!answers[questNumber]) {
-            const updatedAnswers = [...answers];
-            updatedAnswers[questNumber] = 'Not Answered';
-            setAnswers(updatedAnswers);
-        }
 
-        if (questNumber < quizData.length - 1) {
-            setDisableButton(true)
-        } else {
-            // handleSubmit();
-        }
-    };
 
     const nextQuestion = () => {
         setQuestNumber((prev) => prev + 1);
@@ -79,8 +61,6 @@ const Quiz = () => {
 
     const handleSubmit = () => {
         console.log('Submitted Answers:', answers);
-        setTimerRunning(false); // Stop the timer when the quiz is submitted
-        clearInterval(interval);
 
         // Check answers and calculate result
         let correctCount = 0;
@@ -117,7 +97,7 @@ const Quiz = () => {
                             placeItems: 'center',
                         }}
                     >
-                        {timer}
+                        {/* Timer Removed */}
                     </span>
                 }
             />
@@ -173,7 +153,7 @@ const Quiz = () => {
                                 disabled={questNumber === 0 || disableButton}
                             >
                                 <ion-icon name="arrow-back-outline"></ion-icon>
-                                <span className='ml-1'>Previous</span>
+                                <span className=''>Previous</span>
                             </button>
 
 
@@ -182,16 +162,16 @@ const Quiz = () => {
                                 style={{ height: '40px' }}
                                 data-toggle="modal" data-target="#DialogBasic"
                             >
-                                Submit Quiz
+                                Submit
                             </button>
 
                             <button
                                 onClick={nextQuestion}
                                 className="btn btn-outline-success d-flex align-items-center"
                                 style={{ height: '40px' }}
-                                disabled={disableButton}
+                                disabled={questNumber + 1 === quizData.length || disableButton}
                             >
-                                <span className='mr-1'>Next</span>
+                                <span className=''>Next</span>
                                 <ion-icon name="arrow-forward-outline"></ion-icon>
                             </button>
 
@@ -214,7 +194,7 @@ const Quiz = () => {
 
             {/* Submit Confirmation Toast */}
 
-            <div id="appCapsule">
+            <div id="appCapsule" className='m-0 p-0'>
 
                 <div className="modal fade dialogbox" id="DialogBasic" data-backdrop="static" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document">
@@ -227,7 +207,7 @@ const Quiz = () => {
                                 </h5>
                             </div>
                             <div className="modal-body">
-                            Are you sure you want to Submit ?
+                                Are you sure you want to Submit ?
                             </div>
                             <div className="modal-footer">
                                 <div className="btn-inline align-item-center">
@@ -246,4 +226,4 @@ const Quiz = () => {
     );
 };
 
-export default Quiz;
+export default QuizGame;

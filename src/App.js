@@ -6,11 +6,9 @@ import ScrollToTop from './components/ScrollToTop'
 import Footer from './components/Footer'
 import Header from './components/Header';
 import Home from './Pages/Home'
-import Course from './Pages/Course';
 import RecommendCourse from './components/RecommendCourse';
 import MyCourses from './Pages/MyCourses';
 import CourseDetail from './Pages/CourseDetails';
-import CategorizedCourse from './Pages/CategorizedCourse';
 import VideoPlayer from './Pages/VideoPlayer';
 import UpdateProfile from './Pages/UpdateProfile'
 import Profile from './Pages/Profile';
@@ -28,6 +26,10 @@ import InvoiceView from './Pages/InvoiceView';
 import QuizCategory from './Pages/QuizCategory';
 import TrendingCourse from './components/TrendingCourse';
 import CoursePDF from './Pages/CoursePDF';
+import CourseCategories from './Pages/CourseCategories';
+import CourseType from './Pages/CourseType';
+import QuizType from './Pages/QuizType';
+import QuizDetails from './Pages/QuizDetails'
 
 const App = () => {
 
@@ -73,12 +75,12 @@ const App = () => {
         <Route path='/course' element={
           <>
             <Header profile={true} title={'Categories'} showSearch={true} />
-            <Course />
+            <CourseCategories />
           </>
         } />
-        <Route path='/course_category/:courseType' element={
+        <Route path='/course_type/:courseType' element={
           <>
-            <CategorizedCourse />
+            <CourseType />
           </>
         } />
         <Route path='/course-detail/:courseId' element={
@@ -125,6 +127,17 @@ const App = () => {
           <Route path='/quiz' element={
             <>
               <Quiz />
+            </>
+          } />
+          <Route path='/quiz_details/:quizId' element={
+            <>
+              <Header profile={true} title={'Quiz Details'} showSearch={false} />
+              <QuizDetails />
+            </>
+          } />
+          <Route path='/quiz_type/:quizType' element={
+            <>
+              <QuizType />
             </>
           } />
           <Route path='/quiz-category' element={

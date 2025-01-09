@@ -6,9 +6,9 @@ import Header from '../components/Header'
 import axios from 'axios'
 import { SITE_URL } from '../define/Define'
 
-const CategorizedCourse = () => {
+const QuizType = () => {
 
-    const { courseType } = useParams();
+    const { quizType } = useParams();
     // Courses Data
     const { courseData } = useContext(CourseContext);
 
@@ -29,14 +29,14 @@ const CategorizedCourse = () => {
     }, [])
 
     // Show specific courses of the selected category
-    const selectedCategory = courseCategory.find((item) => item.ser_title === courseType)?.id;
+    const selectedCategory = courseCategory.find((item) => item.ser_title === quizType)?.id;
 
 
 
     if (!selectedCategory) {
         return (
             <>
-                <Header goBackTo={'/course'} title={`${courseType}`} showSearch={true} />
+                <Header goBackTo={'/quiz-category'} title={`${quizType}`} showSearch={true} />
                 <div className='pt-5 text-center'>
                     <div class="spinner-border text-success" role="status"></div>
                 </div>
@@ -48,7 +48,7 @@ const CategorizedCourse = () => {
 
     return (
         <>
-            <Header goBackTo={'/course'} title={`${courseType}`} showSearch={true} />
+            <Header goBackTo={'/quiz-category'} title={`${quizType}`} showSearch={true} />
             <div className='pb-5'>
                 <div className='row px-2 pb-5'>
 
@@ -59,7 +59,7 @@ const CategorizedCourse = () => {
                                 .filter((item) => Number(item.category) === Number(selectedCategory))
                                 .map((item) => (
                                     <div className="col-6 mt-2" key={item.id}>
-                                        <Link to={`/course-detail/${item.program_name}`} className='card shadow text-decoration-none border'>
+                                        <Link to={`/quiz_details/${item.program_name}`} className='card shadow text-decoration-none border'>
                                             <CardPopular
                                                 title={item.program_name}
                                                 image={`https://wealthsaga.store/new/app/upload/course_img/${item.img}`}
@@ -79,4 +79,4 @@ const CategorizedCourse = () => {
     )
 }
 
-export default CategorizedCourse
+export default QuizType
