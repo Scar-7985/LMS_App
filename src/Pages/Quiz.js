@@ -9,10 +9,9 @@ const QuizGame = () => {
     const [answers, setAnswers] = useState([]);
     const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [result, setResult] = useState(null);
-    const [timeLeft, setTimeLeft] = useState(60);
     const [disableButton, setDisableButton] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(5 * 60);
 
-    console.log(timeLeft);
 
 
     useEffect(() => {
@@ -37,6 +36,26 @@ const QuizGame = () => {
 
     }, []);
 
+    useEffect(() => {
+        if (timeLeft > 0) {
+            const timer = setInterval(() => {
+                setTimeLeft((prevTime) => prevTime - 1);
+            }, 1000);
+
+
+            return () => clearInterval(timer);
+        } else {
+            setDisableButton(true);
+        }
+    }, [timeLeft]);
+
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds
+            .toString()
+            .padStart(2, '0')}`;
+    };
 
 
     const filteredQuestion = useMemo(() => {
@@ -89,15 +108,16 @@ const QuizGame = () => {
                 showSearch={false}
                 rightSec={
                     <span
-                        className="border border-2 border-danger rounded-circle"
+                        className={`border rounded text-white ${quizSubmitted ? 'd-none' : ''}`}
                         style={{
-                            width: '40px',
+                            width: '60px',
                             height: '40px',
                             display: 'grid',
                             placeItems: 'center',
+                            background: '#1DCC70'
                         }}
                     >
-                        {/* Timer Removed */}
+                        {formatTime(timeLeft)}
                     </span>
                 }
             />
@@ -158,7 +178,7 @@ const QuizGame = () => {
 
 
                             <button
-                                className="btn btn-success"
+                                className="btn btn-success shadow"
                                 style={{ height: '40px' }}
                                 data-toggle="modal" data-target="#DialogBasic"
                             >
