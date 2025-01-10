@@ -9,7 +9,7 @@ import { SITE_URL } from '../define/Define';
 const QuizDetail = () => {
 
 
-    const { courseData, videoData } = useContext(CourseContext);
+    const { courseData } = useContext(CourseContext);
     const { quizId } = useParams();
 
     // Show specific course details
@@ -21,25 +21,6 @@ const QuizDetail = () => {
         // console.error('Course not found');
     }
 
-    const filteredVideo = filteredCourse ? videoData.filter((item) => String(item.category) === String(filteredCourse.id)) : [];
-
-    const [goToVideo, setGoToVideo] = useState('#');
-
-    useEffect(() => {
-        if (filteredCourse && filteredVideo.length > 0) {
-            setGoToVideo(String(filteredVideo[0].id));
-        } else {
-            console.error('Video not found or course is unavailable');
-        }
-    }, [filteredCourse, filteredVideo]);
-
-
-    const navigate = useNavigate();
-    const goToPDF = (invidP) => {
-        navigate("/course_pdf",
-            // { state: { invid: invidP } }
-        );
-    }
 
     return (
         <>
@@ -57,27 +38,28 @@ const QuizDetail = () => {
                                 {isAuthenticated ?
                                     // If (status === 1) Purchased else not Purchased
                                     (filteredCourse.status === 1 ? (
-                                        <button>
-                                            <Link
-                                                to={'/quiz'}
-                                                style={{ color: 'white', textDecoration: 'none' }}>
-                                                Play Now
-                                            </Link>
-                                        </button>
+                                        <Link
+                                            className='w-100'
+                                            to={'/quiz'}
+                                            style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
+                                            Play now
+                                        </Link>
                                     ) : (
 
-                                        <button>
-                                            <Link
-                                                to={'/quiz'}
-                                                style={{ color: 'white', textDecoration: 'none' }}>
-                                                Play Now
-                                            </Link>
-                                        </button>
+                                        <Link
+                                            className='w-100'
+                                            to={'/quiz'}
+                                            style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
+                                            Play now
+                                        </Link>
                                     )
                                     ) : (
-                                        <button>
-                                            <Link to='/login' style={{ color: 'white', textDecoration: 'none' }}>Play now</Link>
-                                        </button>
+                                        <Link
+                                            className='w-100'
+                                            to={'/login'}
+                                            style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
+                                            Play now
+                                        </Link>
                                     )
                                 }
                             </div>
@@ -102,47 +84,47 @@ const QuizDetail = () => {
 
 
                             <>
-                                        <div className="card shadow py-2">
-                                            <div className="card-body">
-                                                <h2 className='mb-4 text-center' style={{ fontWeight: '600' }}>Quiz Details</h2>
-                                                <div className="row">
-                                                    {/* Item */}
-                                                    <div className="col-6 d-flex flex-column justify-content-between align-items-center">
-                                                        <div className='d-flex justify-content-between align-items-center w-100'>
-                                                            <ion-icon name="time" style={{ color: 'orange', fontSize: '20px' }}></ion-icon>
-                                                            <span style={{ fontSize: '14px' }}>Total Timing</span>
-                                                        </div>
-                                                        <div className='text-dark fw-bold ml-1' style={{ fontWeight: '500' }}>5 Min</div>
-                                                    </div>
-                                                    {/* Item */}
-
-                                                    {/* ====================================================================== */}
-
-                                                    {/* Item */}
-                                                    <div className="col-6 d-flex flex-column justify-content-between align-items-end">
-                                                        <div className='d-flex justify-content-between align-items-center w-100'>
-                                                            <ion-icon name="time" style={{ color: 'orange', fontSize: '20px' }}></ion-icon>
-                                                            <span style={{ fontSize: '14px' }}>Total Questions</span>
-                                                        </div>
-                                                        <div className='text-dark fw-bold' style={{ fontWeight: '500' }}>{filteredCourse.id} Questions</div>
-                                                    </div>
-                                                    {/* Item */}
-
-                                                    {/* ====================================================================== */}
-
+                                <div className="card shadow py-2">
+                                    <div className="card-body">
+                                        <h2 className='mb-4 text-center' style={{ fontWeight: '600' }}>Quiz Details</h2>
+                                        <div className="row">
+                                            {/* Item */}
+                                            <div className="col-6 d-flex flex-column justify-content-between align-items-center">
+                                                <div className='d-flex justify-content-between align-items-center w-100'>
+                                                    <ion-icon name="time" style={{ color: 'orange', fontSize: '20px' }}></ion-icon>
+                                                    <span style={{ fontSize: '14px' }}>Total Timing</span>
                                                 </div>
+                                                <div className='text-dark fw-bold ml-1' style={{ fontWeight: '500' }}>5 Min</div>
                                             </div>
+                                            {/* Item */}
+
+                                            {/* ====================================================================== */}
+
+                                            {/* Item */}
+                                            <div className="col-6 d-flex flex-column justify-content-between align-items-end">
+                                                <div className='d-flex justify-content-between align-items-center w-100'>
+                                                    <ion-icon name="time" style={{ color: 'orange', fontSize: '20px' }}></ion-icon>
+                                                    <span style={{ fontSize: '14px' }}>Total Questions</span>
+                                                </div>
+                                                <div className='text-dark fw-bold' style={{ fontWeight: '500' }}>{filteredCourse.id} Questions</div>
+                                            </div>
+                                            {/* Item */}
+
+                                            {/* ====================================================================== */}
+
                                         </div>
+                                    </div>
+                                </div>
 
 
-                                        <div className="card shadow my-2">
-                                            <div className="card-body m-0">
-                                                <h3>Description</h3>
-                                                <div dangerouslySetInnerHTML={{ __html: filteredCourse.program_desc }} />
-                                            </div>
-                                        </div>
-                                    </>
-                                  
+                                <div className="card shadow my-2">
+                                    <div className="card-body m-0">
+                                        <h3>Description</h3>
+                                        <div dangerouslySetInnerHTML={{ __html: filteredCourse.program_desc }} />
+                                    </div>
+                                </div>
+                            </>
+
                         </div>
 
                     </div>

@@ -38,7 +38,7 @@ const CourseType = () => {
             <>
                 <Header goBackTo={'/course'} title={`${courseType}`} showSearch={true} />
                 <div className='pt-5 text-center'>
-                    <div class="spinner-border text-success" role="status"></div>
+                    <div className="spinner-border text-success" role="status"></div>
                 </div>
             </>
         )

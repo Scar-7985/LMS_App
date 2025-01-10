@@ -37,9 +37,9 @@ const CourseDetail = () => {
     const navigate = useNavigate();
     const goToPDF = (invidP) => {
         navigate("/course_pdf",
-          // { state: { invid: invidP } }
+            // { state: { invid: invidP } }
         );
-      }
+    }
 
     return (
         <>
@@ -47,38 +47,42 @@ const CourseDetail = () => {
 
             {
                 filteredCourse ? (
-                    <div  key={filteredCourse.id} style={{width: '100vw'}}>
+                    <div key={filteredCourse.id} style={{ width: '100vw' }}>
 
                         <div className="section full bg-white">
-                            <div className="subscribe bg-white shadow-lg" style={{ height: '50px' }}>
-                                <div className='text-center'
+
+
+                            <div className="subscribe bg-white shadow-lg w-100" style={{ height: '50px' }}>
+                                <div className='text-center w-50'
                                     style={{ fontWeight: '500', fontSize: '18px', display: 'grid', placeItems: 'center' }}>
                                     ₹ {filteredCourse.of_price}
                                 </div>
                                 {isAuthenticated ?
                                     // If (status === 1) Purchased else not Purchased
                                     (filteredCourse.status === 1 ? (
-                                        <button>
-                                            <Link
-                                                to={`/video/${goToVideo}`}
-                                                style={{ color: 'white', textDecoration: 'none' }}>
-                                                Watch now
-                                            </Link>
-                                        </button>
+                                        <Link
+                                            className='w-50'
+                                            to={`/video/${goToVideo}`}
+                                            style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
+                                            Watch now
+                                        </Link>
                                     ) : (
 
-                                        <button>
-                                            <Link
-                                                to={`/checkout/${filteredCourse.id}`}
-                                                style={{ color: 'white', textDecoration: 'none' }}>
-                                                Buy now
-                                            </Link>
-                                        </button>
+
+                                        <Link
+                                            className='w-50'
+                                            to={`/checkout/${filteredCourse.id}`}
+                                            style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
+                                            Buy now
+                                        </Link>
                                     )
                                     ) : (
-                                        <button>
-                                            <Link to='/login' style={{ color: 'white', textDecoration: 'none' }}>Buy now</Link>
-                                        </button>
+                                        <Link
+                                            className='w-50'
+                                            to={'/login'}
+                                            style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
+                                            Buy now
+                                        </Link>
                                     )
                                 }
                             </div>
@@ -223,9 +227,9 @@ const CourseDetail = () => {
                                         ) : (
                                             <div className='row'>
                                                 <div className="col-12 mt-1">
-                                                    <div className="card shadow" 
-                                                    onClick={goToPDF}
-                                                    style={{cursor: 'pointer'}}>
+                                                    <div className="card shadow"
+                                                        onClick={goToPDF}
+                                                        style={{ cursor: 'pointer' }}>
                                                         <div className="card-body d-flex align-items-center">
                                                             <img src="/assets/img/pdf_icon.png" style={{ width: '50px' }} alt="" />
                                                             <div className='px-2'>
