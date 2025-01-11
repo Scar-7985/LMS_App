@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { CourseContext } from '../context/CourseContext';
-import VideoCard from '../components/VideoCard';
 import { isAuthenticated } from '../define/Define'
 import { SITE_URL } from '../define/Define';
 

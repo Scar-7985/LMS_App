@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { CourseContext } from './context/CourseContext';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import ScrollToTop from './components/ScrollToTop'
 import Footer from './components/Footer'
@@ -18,7 +19,6 @@ import MyOrders from './Pages/MyOrders';
 import LegalTerms from './Pages/LegalTerms';
 import Support from './Pages/Support';
 import NonProtectedRoute from './components/NonProtectedRoute';
-import { ToastContainer } from 'react-toastify';
 import NotificationDetails from './Pages/NotificationDetails';
 import Checkout from './Pages/Checkout';
 import Quiz from './Pages/Quiz';
@@ -85,20 +85,20 @@ const App = () => {
         } />
         <Route path='/course-detail/:courseId' element={
           <>
-            <Header goBackTo={'/course'} title={'Course Detail'} showSearch={false} />
+            <Header title={'Course Detail'} showSearch={false} />
             <CourseDetail />
           </>
         } />
 
         <Route path='/recommended-course' element={
           <>
-            <Header profile={false} goBackTo={'/course'} title={'Recommended Courses'} showSearch={true} />
+            <Header profile={false} title={'Recommended Courses'} showSearch={true} />
             <RecommendCourse />
           </>
         } />
         <Route path='/trending-course' element={
           <>
-            <Header profile={false} goBackTo={'/course'} title={'Trending Courses'} showSearch={true} />
+            <Header profile={false} title={'Trending Courses'} showSearch={true} />
             <TrendingCourse />
           </>
         } />
@@ -115,7 +115,7 @@ const App = () => {
           } />
           <Route path='/checkout/:checkoutId' element={
             <>
-              <Header profile={true} title={'Checkout'} showSearch={false} />
+              <Header profile={false} title={'Checkout'} showSearch={false} />
               <Checkout />
             </>
           } />
@@ -131,7 +131,7 @@ const App = () => {
           } />
           <Route path='/quiz_details/:quizId' element={
             <>
-              <Header profile={true} title={'Quiz Details'} showSearch={false} />
+              <Header profile={false} title={'Quiz Details'} showSearch={false} />
               <QuizDetails />
             </>
           } />
@@ -165,31 +165,31 @@ const App = () => {
           } />
           <Route path='/update-profile' element={
             <>
-              <Header goBackTo={'/profile'} title={'Update Profile'} showSearch={false} />
+              <Header title={'Update Profile'} showSearch={false} />
               <UpdateProfile />
             </>
           } />
           <Route path='/notification' element={
             <>
-              <Header goBackTo={'/profile'} title={'Notification'} showSearch={false} />
+              <Header title={'Notification'} showSearch={false} />
               <Notification />
             </>
           } />
           <Route path='/notification-detail/:notificationId' element={
             <>
-              <Header goBackTo={'/notification'} title={'Notification Details'} showSearch={false} />
+              <Header title={'Notification Details'} showSearch={false} />
               <NotificationDetails />
             </>
           } />
           <Route path='/my-orders' element={
             <>
-              <Header goBackTo={'/profile'} title={'My Orders'} showSearch={false} />
+              <Header title={'My Orders'} showSearch={false} />
               <MyOrders />
             </>
           } />
           <Route path='/legal-terms' element={
             <>
-              <Header goBackTo={'/profile'} title={'Terms & Conditions'} showSearch={false} />
+              <Header title={'Terms & Conditions'} showSearch={false} />
               <LegalTerms />
             </>
           } />

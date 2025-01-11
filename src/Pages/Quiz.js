@@ -10,7 +10,7 @@ const QuizGame = () => {
     const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [result, setResult] = useState(null);
     const [disableButton, setDisableButton] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(5 * 60);
+    const [timeLeft, setTimeLeft] = useState(5);
 
 
 
@@ -46,6 +46,7 @@ const QuizGame = () => {
             return () => clearInterval(timer);
         } else {
             setDisableButton(true);
+            // handleSubmit()
         }
     }, [timeLeft]);
 

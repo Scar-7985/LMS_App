@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { CourseContext } from '../context/CourseContext'
 import { SITE_URL } from '../define/Define';
-import secureLocalStorage from 'react-secure-storage';
 import { toast } from 'react-toastify';
 
 const Login = () => {
