@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import CardPopular from '../components/CardPopular'
 import { CourseContext } from '../context/CourseContext'
 import Header from '../components/Header'
 import axios from 'axios'
@@ -38,7 +37,7 @@ const QuizType = () => {
             <>
                 <Header goBackTo={'/quiz-category'} title={`${quizType}`} showSearch={true} />
                 <div className='pt-5 text-center'>
-                    <div class="spinner-border text-success" role="status"></div>
+                    <div className="spinner-border text-success" role="status"></div>
                 </div>
             </>
         )
@@ -60,13 +59,19 @@ const QuizType = () => {
                                 .map((item) => (
                                     <div className="col-6 mt-2" key={item.id}>
                                         <Link to={`/quiz_details/${item.program_name}`} className='card shadow text-decoration-none border'>
-                                            <CardPopular
-                                                title={item.program_name}
-                                                image={`https://wealthsaga.store/new/app/upload/course_img/${item.img}`}
-                                                of_price={item.of_price}
-                                                ac_price={item.ac_price}
-                                                category={item.category}
-                                            />
+                                            {/* ========================== */}
+
+                                            <div className="ard-body d-flex flex-column shadow">
+                                                <img src={`${SITE_URL}new/app/upload/course_img/${item.img}`} alt="img" className="image-block w-100" style={{ height: '120px', borderRadius: '7px 7px 0 0' }} />
+                                                <div className='mt-1 p-2'>
+                                                    <h4 className='text-secondary' style={{ fontSize: '16px', wordWrap: 'break-word', height: '40px' }}>{item.program_name.length > 20 ? item.program_name.substring(0, 20) + "..." : item.program_name}
+                                                    </h4>
+                                                    <h5 className='p-0 text-secondary' style={{ fontSize: '12px' }}>Questions : {item.category}</h5>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            {/* ========================== */}
                                         </Link>
                                     </div>
                                 ))

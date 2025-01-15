@@ -36,6 +36,7 @@ const Notification = () => {
 
                         {
                             notification.length > 0 ? (
+
                                 notification.map((item) => {
                                     return (
                                         <li className="item" key={item.id}>
@@ -57,6 +58,7 @@ const Notification = () => {
                                         </li>
                                     )
                                 }
+
                                 )
                             ) : (
                                 <div className='text-center py-5'>
@@ -78,37 +80,6 @@ const Notification = () => {
                                         <div className="text-xsmall">5/3/2020 10:30 AM</div>
                                     </div>
                                     <span className="badge badge-success badge-empty"></span>
-                                </div>
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link style={{ textDecoration: 'none' }} to='#' className="item">
-                                <div className="icon-box bg-danger">
-                                    <ion-icon name="key-outline"></ion-icon>
-                                </div>
-                                <div className="in">
-                                    <div>
-                                        <div className="mb-05"><strong>Password changed</strong></div>
-                                        <div className="text-small mb-05">Your password has been changed</div>
-                                        <div className="text-xsmall">5/3/2020 10:30 AM</div>
-                                    </div>
-                                    <span className="badge badge-success">3</span>
-                                </div>
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link style={{ textDecoration: 'none' }} to='#' className="item">
-                                <div className="icon-box bg-danger">
-                                    <ion-icon name="key-outline"></ion-icon>
-                                </div>
-                                <div className="in">
-                                    <div>
-                                        <div className="mb-05"><strong>Password changed</strong></div>
-                                        <div className="text-small mb-05">Your password has been changed</div>
-                                        <div className="text-xsmall">5/3/2020 10:30 AM</div>
-                                    </div>
                                 </div>
                             </Link>
                         </li>

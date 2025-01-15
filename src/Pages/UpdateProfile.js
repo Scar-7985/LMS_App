@@ -2,14 +2,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { SITE_URL } from "../define/Define";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 
 const UpdateProfile = () => {
 
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
-        login_id: window.localStorage.getItem("login_id") || "",
-        uname: "User",
-        phone: "2222444466",
+        login_id: window.localStorage.getItem("login_id"),
+        uname: "",
+        phone: "",
         email: "",
         address: "",
     });
@@ -58,20 +61,29 @@ const UpdateProfile = () => {
                 toast.error(response.data.msg);
             } else {
                 toast.success(response.data.msg);
+                window.localStorage.removeItem('user_name');
+                window.localStorage.removeItem('user_email');
+                window.localStorage.setItem('user_name', formData.uname);
+                window.localStorage.setItem('user_email', formData.email);
+                setTimeout(() => {
+                    navigate('/profile');
+                }, 2000);
             }
-            console.log("Profile updated:", response.data);
+            // console.log("Profile updated:", response.data);
         } catch (error) {
             console.error("Error updating profile:", error);
         }
     };
 
+
+
     return (
-        <>
+        <div style={{ paddingBottom: '80px' }}>
 
 
             <div id="appCapsule" className='py-0'>
 
-                <div className="section mt-3 text-center">
+                <div className="section text-center">
                     <div className="avatar-section">
                         <div
                             className=""
@@ -98,8 +110,10 @@ const UpdateProfile = () => {
 
                     </div>
                     <div className="my-3">
-                        <p className='m-0' style={{ color: 'black', fontWeight: '500' }}>{formData.uname}</p>
-                        <p className='m-0' style={{ fontSize: '12px' }}><span>+91</span> {formData.phone}</p>
+                        <p className='m-0' style={{ color: 'black', fontWeight: '500' }}>
+                            {window.localStorage.getItem("user_name") === 'null' ? '' : window.localStorage.getItem("user_name")}
+                        </p>
+                        <p className='m-0' style={{ fontSize: '12px' }}><span>+91</span> {window.localStorage.getItem("user_phone")}</p>
                     </div>
                 </div>
 
@@ -116,7 +130,14 @@ const UpdateProfile = () => {
 
                             <div className="form-group boxed">
                                 <div className="input-wrapper">
-                                    <label className="label" htmlFor="phone">Phone</label>
+                                    <label className="label" htmlFor="phone" style={{ display: 'flex', alignItems: 'end', gap: '6px' }}>
+                                        <span>Phone no. verified</span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                            </svg>
+                                        </span>
+                                    </label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -150,7 +171,7 @@ const UpdateProfile = () => {
                                     <input
                                         type="text"
                                         className="form-control" id="email5"
-                                        placeholder="E-mail address"
+                                        placeholder="E-mail"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
@@ -166,30 +187,23 @@ const UpdateProfile = () => {
                             <div className="form-group boxed">
                                 <div className="input-wrapper">
                                     <label className="label" htmlFor="address">Address</label>
-                                    <input
+                                    <textarea
                                         type="text"
                                         className="form-control" id="address"
-                                        placeholder="E-mail address"
+                                        placeholder="Address here..."
                                         name="address"
                                         value={formData.address}
                                         onChange={handleChange}
-                                        style={{ backgroundColor: '#E8F0FE' }}
+                                        style={{
+                                            backgroundColor: '#E8F0FE',
+                                            height: '100px',
+                                        }}
                                     />
-                                    <button
-                                        style={{ display: 'none' }}
-                                        className="btn btn-primary"
-                                    >Save Changes</button>
                                 </div>
                             </div>
 
-                            {/* <div className="form-group boxed">
-                                <div className="input-wrapper">
-                                    <label className="label" htmlFor="password5">Date Of Birth</label>
-                                    <input type="date" className="form-control" id="password5" />
-                                </div>
-                            </div> */}
 
-                            <div className="form-group boxed mt-3 pb-0">
+                            <div className="form-group boxed mt-4 pb-0">
                                 <div className="input-wrapper">
                                     <button type="submit" className='btn btn-warning text-white w-100'
                                     >Update</button>
@@ -202,31 +216,9 @@ const UpdateProfile = () => {
                 </div>
             </div>
 
-            {/* ===================================== */}
-            {/* Profile Update Success Toast */}
 
-            <div className="modal fade dialogbox" id="DialogIconedSuccess" data-backdrop="static" tabIndex="-1" role="dialog">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-icon text-success">
-                            <ion-icon name="checkmark-circle"></ion-icon>
-                        </div>
-                        <div className="modal-header">
-                            <h5 className="modal-title">Success</h5>
-                        </div>
-                        <div className="modal-body">
-                            Profile Updated Successfully
-                        </div>
-                        <div className="modal-footer">
-                            <div className="btn-inline">
-                                <a href="#" className="btn" data-dismiss="modal">CLOSE</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </>
+        </div>
     )
 }
+
 export default UpdateProfile;

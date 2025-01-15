@@ -1,122 +1,174 @@
-import React from 'react'
-import Header from '../components/Header'
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Support = () => {
+
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email_id: window.localStorage.getItem('user_email'),
+        phone_no: window.localStorage.getItem('user_phone'),
+        name: (window.localStorage.getItem('user_name') === 'null' ? ("USER - "+window.localStorage.getItem('login_id')) : (window.localStorage.getItem('user_name'))),
+        subject: '',
+        message: '',
+    });
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // console.log('formData => ', formData);
+
+        axios.post('https://wealthsaga.store/new/app/api/support.php', formData).then(response => {
+
+            // console.log("response => ", response.data);
+
+            // toast.error(response.data.msg);
+
+            if (response.data.status === 100) {
+                document.getElementById('openModal').click();
+            } else if (response.data.status === 101) {
+                toast.warning(response.data.msg);
+            }
+
+        }).catch(error => {
+            console.log('error => ', error);
+
+        })
+
+
+
+    };
+
     return (
         <>
-            <Header goBackTo={'/profile'} title={'Chat'} showSearch={false} />
-            <div id="appCapsule" className='m-0 pt-0' style={{ paddingBottom: '80px' }}>
-
-                <div className="message-divider">
-                    Friday, Sep 20, 10:40 AM
-                </div>
-
-
-                <div className="message-item">
-                    <img src="assets/img/sample/avatar/avatar2.png" alt="avatar" className="avatar" />
-                    <div className="content">
-                        <div className="title">John</div>
-                        <div className="bubble">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-                        <div className="footer">10:44 AM</div>
-                    </div>
-                </div>
-
-                <div className="message-item user">
-                    <div className="content">
-                        <div className="bubble">
-                            Aenean volutpat.
-                        </div>
-                        <div className="footer">10:46 AM</div>
-                    </div>
-                </div>
-
-                <div className="message-divider">
-                    Friday, Sep 21, 7:40 PM
-                </div>
-
-
-                <div className="message-item">
-                    <img src="assets/img/sample/avatar/avatar2.png" alt="avatar" className="avatar" />
-                    <div className="content">
-                        <div className="title">John</div>
-                        <div className="bubble">
-                            Aenean hendrerit porttitor dolor id elementum. Mauris nec purus pulvinar, fringilla ex eget,
-                            ultrices urna.
-                        </div>
-                        <div className="footer">10:40 AM</div>
-                    </div>
-                </div>
-
-                <div className="message-item user">
-                    <div className="content">
-                        <div className="bubble">
-                            <img src="assets/img/sample/photo/2.jpg" alt="photo" className="imaged w160" />
-                        </div>
-                        <div className="footer">10:46 AM</div>
-                    </div>
-                </div>
-
-                <div className="message-item user">
-                    <div className="content">
-                        <div className="bubble">
-                            Maecenas sollicitudin justo vel posuere eleifend. In eget iaculis mi, vitae suscipit dui. Phasellus
-                            a facilisis magna, eget aliquam turpis. Nullam eros neque, varius vitae commodo blandit, placerat
-                            quis est.
-                        </div>
-                        <div className="footer">10:40 AM</div>
-                    </div>
-                </div>
-
-                <div className="message-item">
-                    <img src="assets/img/sample/avatar/avatar2.png" alt="avatar" className="avatar" />
-                    <div className="content">
-                        <div className="title">John</div>
-                        <div className="bubble">
-                            <img src="assets/img/sample/photo/5.jpg" alt="photo" className="imaged w160" />
-                        </div>
-                        <div className="footer">10:40 AM</div>
-                    </div>
-                </div>
-
-                <div className="message-item">
-                    <img src="assets/img/sample/avatar/avatar2.png" alt="avatar" className="avatar" />
-                    <div className="content">
-                        <div className="title">John</div>
-                        <div className="bubble">
-                            Aenean hendrerit porttitor dolor id elementum. Mauris nec purus pulvinar, fringilla ex eget,
-                            ultrices urna.
-                        </div>
-                        <div className="footer">10:40 AM</div>
-                    </div>
-                </div>
-
-
+            <Header goBackTo={'/profile'} title={'Support'} showSearch={false} />
+            <div
+                className="section bg-white"
+                style={{ overflow: 'hidden', height: 'calc(100vh - 480px)' }}
+            >
+                <img
+                    className=""
+                    src="/assets/img/bg/Mobile-login.jpg"
+                    style={{ transform: 'scale(1.1)', width: '100%', height: '100%' }}
+                    alt=""
+                />
             </div>
-            {/* <!-- * App Capsule --> */}
 
-            {/* <!-- chat footer --> */}
-            <div className="chatFooter">
-                <form>
-                    <a href="#" className="btn btn-icon btn-text-secondary rounded">
-                        <ion-icon name="camera"></ion-icon>
-                    </a>
-                    <div className="form-group basic">
-                        <div className="input-wrapper">
-                            <input type="text" className="form-control" placeholder="Type a message..." />
-                            <i className="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
+            <div id="appCapsule" className="bg-white pt-0 pb-0">
+                <div className="section full">
+                    <div className="wide-block pt-2 pb-3" style={{ borderBottom: 'none' }}>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group boxed">
+                                <div className="input-wrapper">
+                                    <label className="label" htmlFor="help-type">Subject</label>
+                                    <select
+                                        name="subject"
+                                        className="w-100 py-2 rounded"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        required
+                                    >
+                                        <option value="Blank">Select a subject</option>
+                                        <option value="Course">Course</option>
+                                        <option value="Order">Order</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="form-group boxed">
+                                <div className="input-wrapper">
+                                    <label className="label" htmlFor="message">Message</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        rows="5"
+                                        className="form-control"
+                                        placeholder="Your message here"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        required
+                                    ></textarea>
+                                </div>
+                            </div>
+
+                            <div className="form-group boxed mt-2 pb-3">
+                                <div className="input-wrapper">
+                                    <button className="btn btn-warning text-white w-100 update-btn" type="submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        {/* Display Success Message Directly */}
+                        <>
+
+                            <div className="section mt-2 d-none">
+                                <div className="section-title">Iconed</div>
+                                <div className="card">
+                                    <ul className="listview flush transparent image-listview text">
+                                        <li>
+                                            <span className="item" data-bs-toggle="modal" data-bs-target="#DialogIconedSuccess" id='openModal'>
+                                                <div className="in">
+                                                    <div>Success</div>
+                                                </div>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* ================================ */}
+
+                            <div className="modal fade dialogbox" id="DialogIconedSuccess" data-bs-backdrop="static" tabIndex="-1"
+                                role="dialog">
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
+                                        <div className="modal-icon text-success">
+                                            <ion-icon name="checkmark-circle"></ion-icon>
+                                        </div>
+                                        {/* <div className="modal-header">
+                                                <h5 className="modal-title">Success</h5>
+                                            </div> */}
+                                        <div className="modal-body mt-4">
+                                            Thank you for reaching out to us! <br />
+                                            We will respond to you shortly via email.
+                                        </div>
+                                        <div className="modal-footer">
+                                            <div className="btn-inline">
+                                                <span className="btn" data-bs-dismiss="modal"
+                                                    onClick={() => {
+                                                        setFormData({
+                                                            category: '',
+                                                            message: '',
+                                                        }); navigate('/profile');
+                                                    }}>CLOSE</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </>
+
+
                     </div>
-                    <button type="button" className="btn btn-icon btn-primary rounded">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </button>
-                </form>
+                </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Support
+export default Support;

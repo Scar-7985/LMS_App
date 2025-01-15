@@ -30,10 +30,11 @@ import CourseCategories from './Pages/CourseCategories';
 import CourseType from './Pages/CourseType';
 import QuizType from './Pages/QuizType';
 import QuizDetails from './Pages/QuizDetails'
+import Doubts from './Pages/Doubts';
 
 const App = () => {
 
-  const courseValue = useContext(CourseContext);
+
   // console.log(courseValue);
 
   return (
@@ -191,6 +192,11 @@ const App = () => {
             <>
               <Header title={'Terms & Conditions'} showSearch={false} />
               <LegalTerms />
+            </>
+          } />
+          <Route path='/ask-doubts' element={
+            <>
+              <Doubts />
             </>
           } />
           <Route path='/support' element={

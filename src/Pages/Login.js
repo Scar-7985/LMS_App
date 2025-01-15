@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { CourseContext } from '../context/CourseContext'
+import { useNavigate } from 'react-router-dom';
 import { SITE_URL } from '../define/Define';
 import { toast } from 'react-toastify';
 
@@ -10,7 +9,6 @@ const Login = () => {
 
 
     const navigate = useNavigate();
-    const { isLoggedIn, setIsLoggedIn } = useContext(CourseContext);
 
     const [formData, setFormData] = useState({ phone_no: '' });
     const [otpSent, setOtpSent] = useState(false);
@@ -67,10 +65,22 @@ const Login = () => {
                         }
                         setIsSubmitting(false);
                         const login_id = response.data.login;
+                        const user_name = response.data.name;
+                        const user_phone = response.data.phone;
+                        const user_email = response.data.email;
                         window.localStorage.setItem('login_id', login_id);
-                        navigate('/profile');
+                        window.localStorage.setItem('user_name', user_name);
+                        window.localStorage.setItem('user_phone', user_phone);
+                        window.localStorage.setItem('user_email', user_email);
+                        // ============================================== //
+
+                        if (response.data.name) {
+                            navigate('/');
+                        } else {
+                            navigate('/update-profile');
+                        }
                         window.location.reload();
-                    }, 1500);
+                    }, 2000);
 
                 }
 
@@ -152,6 +162,7 @@ const Login = () => {
                                                         key={index}
                                                         type="text"
                                                         maxLength={1}
+                                                        autocomplete="one-time-code"
                                                         className="form-control otp-input text-center p-0"
                                                         onChange={(e) => handleOtpChange(e, index)}
                                                         onKeyDown={(e) => handleOtpKeyDown(e, index)}
@@ -167,7 +178,7 @@ const Login = () => {
 
                             <div className="form-button-group p-0 mt-4">
                                 <button
-                                id='otpBtn'
+                                    id='otpBtn'
                                     type="submit"
                                     className="btn btn-primary btn-block"
                                     style={{ height: '40px' }}

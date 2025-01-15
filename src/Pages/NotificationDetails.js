@@ -25,7 +25,8 @@ const NotificationDetails = () => {
 
 
     const filteredNotification = notification.find((item) => Number(item.id) === Number(notificationId));
- 
+
+
 
     return (
         <div id="appCapsule" className="full-height pt-3">
@@ -36,7 +37,15 @@ const NotificationDetails = () => {
                         <div className="listed-detail">
                             <div className="icon-wrapper">
                                 <div className="iconbox">
-                                    <ion-icon name="mail"></ion-icon>
+                                    {/* <ion-icon name="mail"></ion-icon> */}
+                                    {
+                                        filteredNotification.img === '' ? (
+                                            <ion-icon name="mail"></ion-icon>
+                                        ) : (
+                                            <img src={`${SITE_URL}new/app/upload/notification_img/${filteredNotification.img}`} width={"100%"} height={"100%"} alt="" />
+                                        )
+                                    }
+
                                 </div>
                             </div>
                             <h5 className="text-center mt-2">{filteredNotification.title}</h5>
