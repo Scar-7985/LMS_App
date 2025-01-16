@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Header from '../components/Header';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const QuizGame = () => {
 
+    const navigate = useNavigate();
     const [quizData, setQuizData] = useState([]);
     const [questNumber, setQuestNumber] = useState(0);
     const [answers, setAnswers] = useState([]);
@@ -11,6 +13,7 @@ const QuizGame = () => {
     const [result, setResult] = useState(null);
     const [disableButton, setDisableButton] = useState(false);
     const [timeLeft, setTimeLeft] = useState(5 * 60);
+    const [timeCompleted, setTimeCompleted] = useState(0);
 
 
 
@@ -80,7 +83,9 @@ const QuizGame = () => {
     };
 
     const handleSubmit = () => {
-        console.log('Submitted Answers:', answers);
+        const elapsedTime = 5 * 60 - timeLeft;
+        setTimeCompleted(elapsedTime);
+        // console.log('Submitted Answers:', answers);
 
         // Check answers and calculate result
         let correctCount = 0;
@@ -100,16 +105,35 @@ const QuizGame = () => {
         setQuizSubmitted(true);
     };
 
+    const formatElapsedTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds
+            .toString()
+            .padStart(2, '0')}`;
+    };
+
+
+    const handleGoBack = () => {
+        if (!quizSubmitted) {
+            document.getElementById('submitBtn').click();
+        } else {
+            navigate('/')
+        }
+    }
+
     return (
         <>
             <Header
                 profile={false}
-                goBackTo={'/quiz-category'}
+                goback={true}
+                goBackTo={handleGoBack}
                 title={'Quiz'}
                 showSearch={false}
                 rightSec={
                     <span
-                        className={`border rounded text-white ${quizSubmitted ? 'd-none' : ''}`}
+                        // className={`border rounded text-white ${quizSubmitted ? 'd-none' : ''}`}
+                        className={`border rounded text-white ${!filteredQuestion || quizSubmitted ? 'd-none' : ''}`}
                         style={{
                             width: '60px',
                             height: '40px',
@@ -127,7 +151,7 @@ const QuizGame = () => {
                 style={{
                     width: '100vw',
                     height: 'calc(100vh - 56px)',
-                    padding: '0 0 60px 0',
+                    border: '2px solid red'
                 }}
             >
                 {quizData.length > 0 && !quizSubmitted ? (
@@ -179,6 +203,7 @@ const QuizGame = () => {
 
 
                             <button
+                                id='submitBtn'
                                 className="btn btn-success shadow"
                                 style={{ height: '40px' }}
                                 data-toggle="modal" data-target="#DialogBasic"
@@ -202,9 +227,11 @@ const QuizGame = () => {
                     <div className="text-center py-5">
                         <h3>Quiz Completed!</h3>
                         <p>
-                            You got {result.correctCount} out of {result.totalQuestions} correct answers <br /> (
-                            {result.score.toFixed(2)}%).
+                            You got {result.correctCount} out of {result.totalQuestions} correct answers <br />
+                            ({result.score.toFixed(2)}%).
                         </p>
+                        <p>Time Taken: {formatElapsedTime(timeCompleted)}</p>
+                        <Link to={'/'} className="btn btn-success">Go To Home</Link>
                     </div>
                 ) : (
                     <div className="text-center py-5">
@@ -243,6 +270,7 @@ const QuizGame = () => {
                     </div>
                 </div>
             </div>
+
         </>
     );
 };

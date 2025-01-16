@@ -4,7 +4,7 @@ import { SITE_URL } from '../define/Define';
 
 const PdfViewer = () => {
 
-  const pdfUrl = (`${SITE_URL}assets/Page.pdf`);
+  const pdfUrl = (`https://wealthsaga.store/assets/Page.pdf`);
 
 
   return (

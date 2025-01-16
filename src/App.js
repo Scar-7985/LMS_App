@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { CourseContext } from './context/CourseContext';
-import { Route, Routes } from 'react-router-dom';
+import React from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import ScrollToTop from './components/ScrollToTop'
@@ -34,8 +33,7 @@ import Doubts from './Pages/Doubts';
 
 const App = () => {
 
-
-  // console.log(courseValue);
+  const location = useLocation();
 
   return (
     <div style={{ padding: '56px 0 0 0', width: '100vw' }}>
@@ -215,7 +213,10 @@ const App = () => {
         } />
 
       </Routes>
-      <Footer />
+      {
+        location.pathname !== '/quiz' && <Footer />
+      }
+
     </div>
   )
 }
