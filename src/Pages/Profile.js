@@ -32,7 +32,7 @@ const Profile = () => {
                         </div>
                         <div>
                             <p className='mt-2 mb-0' style={{ color: 'black', fontWeight: '500' }}>
-                            {window.localStorage.getItem("user_name") === 'null' ? '' : window.localStorage.getItem("user_name")}</p>
+                                {window.localStorage.getItem("user_name") === 'null' ? '' : window.localStorage.getItem("user_name")}</p>
                             <p className='m-0' style={{ fontSize: '12px' }}><span>+91 </span>
                                 {window.localStorage.getItem('user_phone')}</p>
                         </div>

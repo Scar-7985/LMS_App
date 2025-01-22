@@ -6,8 +6,6 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
 
-
-
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({ phone_no: '' });
@@ -22,6 +20,8 @@ const Login = () => {
     };
 
     const handleSubmit = (e) => {
+        // console.log(formData);
+
         e.preventDefault();
         setIsSubmitting(true);
         axios.post(`${SITE_URL}new/app/inc/config/login-query2.php`, formData, {
@@ -77,7 +77,7 @@ const Login = () => {
                         if (response.data.name) {
                             navigate('/');
                         } else {
-                            navigate('/update-profile');
+                            navigate('/update-profile?backBtn=false');
                         }
                         window.location.reload();
                     }, 2000);
@@ -162,7 +162,7 @@ const Login = () => {
                                                         key={index}
                                                         type="text"
                                                         maxLength={1}
-                                                        autocomplete="one-time-code"
+                                                        autoComplete="one-time-code"
                                                         className="form-control otp-input text-center p-0"
                                                         onChange={(e) => handleOtpChange(e, index)}
                                                         onKeyDown={(e) => handleOtpKeyDown(e, index)}

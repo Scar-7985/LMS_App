@@ -30,6 +30,7 @@ import CourseType from './Pages/CourseType';
 import QuizType from './Pages/QuizType';
 import QuizDetails from './Pages/QuizDetails'
 import Doubts from './Pages/Doubts';
+import UserStatus from './define/UserStatus';
 
 const App = () => {
 
@@ -38,19 +39,13 @@ const App = () => {
   return (
     <div style={{ padding: '56px 0 0 0', width: '100vw' }}>
       <ScrollToTop />
-      <ToastContainer
-        // className='text-center'
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="colored"
-      />
+      <ToastContainer position="top-right" autoClose={1500} hideProgressBar={false} newestOnTop={true} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover={false} theme="colored" />
+
+
+      {/* If user is banned by admin  */}
+      <UserStatus />
+      {/* If user is banned by admin  */}
+
       <Routes>
 
         {/* ================== Non-Protected Routes Starts ================== */}
@@ -164,7 +159,6 @@ const App = () => {
           } />
           <Route path='/update-profile' element={
             <>
-              <Header title={'Update Profile'} showSearch={false} />
               <UpdateProfile />
             </>
           } />

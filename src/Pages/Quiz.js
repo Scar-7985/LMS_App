@@ -126,7 +126,7 @@ const QuizGame = () => {
         <>
             <Header
                 profile={false}
-                goback={true}
+                goback={false}
                 goBackTo={handleGoBack}
                 title={'Quiz'}
                 showSearch={false}
@@ -151,7 +151,6 @@ const QuizGame = () => {
                 style={{
                     width: '100vw',
                     height: 'calc(100vh - 56px)',
-                    border: '2px solid red'
                 }}
             >
                 {quizData.length > 0 && !quizSubmitted ? (
@@ -193,7 +192,7 @@ const QuizGame = () => {
                         <div className="d-flex justify-content-between align-items-center px-2" style={{ position: 'absolute', bottom: '20px', left: '0', right: '0' }}>
                             <button
                                 onClick={prevQuestion}
-                                className="btn btn-outline-danger d-flex align-items-center"
+                                className={`btn btn-outline-${questNumber === 0 ? 'secondary' : 'danger'} d-flex align-items-center`}
                                 style={{ height: '40px' }}
                                 disabled={questNumber === 0 || disableButton}
                             >
@@ -213,7 +212,7 @@ const QuizGame = () => {
 
                             <button
                                 onClick={nextQuestion}
-                                className="btn btn-outline-success d-flex align-items-center"
+                                className={`btn btn-outline-${questNumber + 1 === quizData.length ? 'secondary' : 'success'} success d-flex align-items-center`}
                                 style={{ height: '40px' }}
                                 disabled={questNumber + 1 === quizData.length || disableButton}
                             >
@@ -231,7 +230,7 @@ const QuizGame = () => {
                             ({result.score.toFixed(2)}%).
                         </p>
                         <p>Time Taken: {formatElapsedTime(timeCompleted)}</p>
-                        <Link to={'/'} className="btn btn-success">Go To Home</Link>
+                        <Link to={'/'} className="btn btn-success shadow">Go To Home</Link>
                     </div>
                 ) : (
                     <div className="text-center py-5">
@@ -240,7 +239,7 @@ const QuizGame = () => {
                 )}
             </div>
 
-            {/* Submit Confirmation Toast */}
+            {/* Submit Confirmation Pop-up */}
 
             <div id="appCapsule" className='m-0 p-0'>
 

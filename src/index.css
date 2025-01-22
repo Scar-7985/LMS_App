@@ -16039,3 +16039,38 @@ a.text-dark {
   background-color: #D500F9;
   color: #fff;
 }
+
+/* =========================== Skeleton UI =========================== */
+
+.skeleton {
+  background: #e0e0e0; /* Light gray color for skeleton */
+  border-radius: 4px; /* Smooth edges */
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-image {
+  background: #f0f0f0; /* Slightly lighter for image areas */
+}
+
+.skeleton-text {
+  background: #e0e0e0;
+}
+
+@keyframes shimmer {
+  0% {
+      background-position: -200px 0;
+  }
+  100% {
+      background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+      90deg,
+      #e0e0e0 25%,
+      #f0f0f0 50%,
+      #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+}
