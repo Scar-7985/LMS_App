@@ -55,7 +55,7 @@ const Support = () => {
             <Header goBackTo={'/profile'} title={'Support'} showSearch={false} />
             <div
                 className="section bg-white"
-                style={{ overflow: 'hidden', height: 'calc(100vh - 480px)' }}
+                style={{ overflow: 'hidden', height: 'calc(100vh - 440px)' }}
             >
                 <img
                     className=""

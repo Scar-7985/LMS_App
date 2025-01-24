@@ -35,6 +35,12 @@ const UserStatus = () => {
         } else {
             console.log('No authenticated user found.');
         }
+        // ================== If user has not yet updated his details ================== //
+
+        if (isAuthenticated && (window.localStorage.getItem("user_name") === "null")) {
+            navigate('/update-profile?backBtn=false');
+        }
+        // ================== If user has not yet updated his details ================== //
     }, [location.pathname]);
 
     return null;

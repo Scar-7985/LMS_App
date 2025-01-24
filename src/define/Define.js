@@ -1,8 +1,8 @@
 // For localhost access
-// export const SITE_URL = 'https://wealthsaga.store/';
+export const SITE_URL = 'https://wealthsaga.store/';
 
 // For direct access
-export const SITE_URL = '/';
+// export const SITE_URL = '/';
 
 
 
