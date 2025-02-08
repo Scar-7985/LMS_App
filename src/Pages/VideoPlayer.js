@@ -38,7 +38,7 @@ const VideoPlayer = () => {
         (item) => Number(item.category) === Number(currentVideo.category) && item.id !== currentVideo.id
     );
 
-    // console.log('currentVideo => ', currentVideo);
+    // console.log('currentVideo => ', videoData);
 
 
     return (

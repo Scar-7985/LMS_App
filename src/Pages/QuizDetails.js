@@ -47,9 +47,9 @@ const QuizDetail = () => {
 
                                         <Link
                                             className='w-100'
-                                            to={'/quiz'}
+                                            to={'/checkout'}
                                             style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
-                                            Play now
+                                            Buy Course
                                         </Link>
                                     )
                                     ) : (
@@ -57,7 +57,7 @@ const QuizDetail = () => {
                                             className='w-100'
                                             to={'/login'}
                                             style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
-                                            Play now
+                                            Buy Course
                                         </Link>
                                     )
                                 }

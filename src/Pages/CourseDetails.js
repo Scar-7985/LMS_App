@@ -68,7 +68,6 @@ const CourseDetail = () => {
                                         </Link>
                                     ) : (
 
-
                                         <Link
                                             className='w-50'
                                             to={`/checkout/${filteredCourse.id}`}

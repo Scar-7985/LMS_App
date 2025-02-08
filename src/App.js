@@ -38,8 +38,20 @@ const App = () => {
 
   return (
     <div style={{ padding: '56px 0 0 0', width: '100vw' }}>
+
       <ScrollToTop />
-      <ToastContainer position="top-right" autoClose={1500} hideProgressBar={false} newestOnTop={true} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover={false} theme="colored" />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="colored" />
 
 
       {/* If user is banned by admin  */}

@@ -1,18 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../define/Define";
 import Search from "./Search";
+import axios from "axios";
+import { SITE_URL } from "../define/Define";
 
 const Header = ({ title, profile = false, showSearch = false, rightSec, goback = true, goBackTo }) => {
 
     const navigate = useNavigate();
-
+    const [profilePic, setProfilePic] = useState(null);
     // Open Search Bar
     const [isOpenActionSheet, setIsOpenActionSheet] = useState(false);
 
     const handleGoBack = () => {
         navigate(-1); // Navigate to the previous page
     };
+
+
+    useEffect(() => {
+        const fetchDetails = async () => {
+            try {
+                const response = await axios.post(`${SITE_URL}new/app/api/get_profile.php`, {
+                    login_id: window.localStorage.getItem("login_id"),
+                });
+                const data = response.data;
+
+                setProfilePic(data.profile_pic);
+            } catch (error) {
+                console.error("Error fetching details:", error);
+            }
+        };
+
+        fetchDetails();
+    }, []);
+
 
     return (
         <>
@@ -27,7 +48,11 @@ const Header = ({ title, profile = false, showSearch = false, rightSec, goback =
 
                 {profile ? (
                     <Link to='/' className="headerButton">
-                        <img src={isAuthenticated ? "/assets/img/sample/avatar/avatar.png" : "/assets/img/sample/avatar/avatar.png"} alt="image" className="imaged rounded w32" />
+                        {
+                            isAuthenticated
+                                ? <img src={`${SITE_URL}new/app/upload/profile_pic/${profilePic}`} className="imaged rounded w32" alt="" />
+                                : <img src={'/assets/img/sample/avatar/avatar.png'} className="imaged rounded w32" alt="" />
+                        }
                     </Link>
                 ) : (
                     <> {

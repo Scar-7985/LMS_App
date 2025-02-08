@@ -1,10 +1,30 @@
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify";
+import axios from "axios";
+import { isAuthenticated, SITE_URL } from "../define/Define";
 
 const Profile = () => {
 
     const navigate = useNavigate();
+    const [profilePic, setProfilePic] = useState(null);
 
+    useEffect(() => {
+        const fetchDetails = async () => {
+            try {
+                const response = await axios.post(`${SITE_URL}new/app/api/get_profile.php`, {
+                    login_id: window.localStorage.getItem("login_id"),
+                });
+                const data = response.data;
+
+                setProfilePic(data.profile_pic);
+            } catch (error) {
+                console.error("Error fetching details:", error);
+            }
+        };
+
+        fetchDetails();
+    }, []);
 
     const LogOut = () => {
         toast.success("Logged Out Successfully")
@@ -22,13 +42,16 @@ const Profile = () => {
     return (
         <>
 
-            <div id="appCapsule" className="pt-4">
+            <div id="appCapsule" className="pt-4 px-2">
 
                 <div className="section mt-3 text-center">
                     <div className="avatar-section d-flex flex-column">
                         <div>
-                            <img src="/assets/img/sample/avatar/avatar.png"
-                                alt="avatar" className="" style={{ width: '50px', borderRadius: '50%' }} />
+                            {
+                                isAuthenticated
+                                    ? <img src={`${SITE_URL}new/app/upload/profile_pic/${profilePic}`} className="imaged rounded" alt="" style={{ width: '60px' }} />
+                                    : <img src={'/assets/img/sample/avatar/avatar.png'} className="image rounded" alt="avatar" style={{ width: '60px' }} />
+                            }
                         </div>
                         <div>
                             <p className='mt-2 mb-0' style={{ color: 'black', fontWeight: '500' }}>

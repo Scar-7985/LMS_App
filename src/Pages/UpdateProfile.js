@@ -9,9 +9,9 @@ import { useSearchParams } from "react-router-dom";
 
 const UpdateProfile = () => {
 
+    const [profilePic, setProfilePic] = useState(null);
+    const [showChangeImage, setShowChangedImage] = useState(false);
     const [searchParams] = useSearchParams();
-    const backBtn = searchParams.get('backBtn');
-    // console.log("backBtn => ", backBtn);
 
     const navigate = useNavigate();
 
@@ -21,6 +21,7 @@ const UpdateProfile = () => {
         phone: "",
         email: "",
         address: "",
+        uimage: ""
     });
 
     useEffect(() => {
@@ -41,7 +42,9 @@ const UpdateProfile = () => {
                 email: data.email || "",
                 address: data.address || "",
                 phone: data.phone || "",
+                uimage: data.profile_pic || "",
             });
+            setProfilePic(data.profile_pic);
         } catch (error) {
             console.error("Error fetching details:", error);
         }
@@ -49,40 +52,66 @@ const UpdateProfile = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+    const handleImageChange = (e) => {
+        const { name, files } = e.target;
+        const file = files[0];
+
+        const imageURL = URL.createObjectURL(file);
+        console.log(imageURL);
+
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: file,
+        }));
+
+        setShowChangedImage(imageURL);
     };
 
     const handleUpdate = async (e) => {
+
         e.preventDefault();
+        let formdata = new FormData();
+        formdata.append("login_id", formData.login_id);
+        formdata.append("uname", formData.uname);
+        formdata.append("phone", formData.phone);
+        formdata.append("email", formData.email);
+        formdata.append("address", formData.address);
+        formdata.append("uimage", formData.uimage);
+        formdata.append("last_image", profilePic);
+
         try {
             const response = await axios.post(
-                `${SITE_URL}new/app/api/update_profile.php`,
-                formData,
-                {
-                    headers: { "Content-Type": "application/json" },
-                }
-            );
+                `${SITE_URL}new/app/api/update_profile.php`, formdata);
 
             if (response.data.status === 101) {
-                toast.error(response.data.msg);
+                toast.warning(response.data.msg);
+                // console.log(response);
+
             } else {
                 toast.success(response.data.msg);
                 window.localStorage.removeItem('user_name');
                 window.localStorage.removeItem('user_email');
+                window.localStorage.removeItem('user_phone')
+                window.localStorage.setItem('user_phone', formData.phone)
                 window.localStorage.setItem('user_name', formData.uname);
                 window.localStorage.setItem('user_email', formData.email);
                 setTimeout(() => {
-                    navigate('/profile');
-                }, 2000);
+                    window.location.reload();
+                }, 1000);
             }
-            // console.log("Profile updated:", response.data);
+            // console.log("Profile changes:", response.data);
         } catch (error) {
             console.error("Error updating profile:", error);
         }
     };
 
     const handleGoBack = () => {
-        if (backBtn === "false") {
+        if (window.localStorage.getItem("user_name") === "null") {
             toast.warn("Please fill out the details");
         } else {
             navigate('/profile');
@@ -92,7 +121,7 @@ const UpdateProfile = () => {
 
 
     return (
-        <div className="bg-white" style={{ position: 'relative', zIndex: `${backBtn === "false" ? '1000' : '100'}` }}>
+        <div className="bg-white" style={{ position: 'relative', zIndex: `${window.localStorage.getItem("user_name") === "null" ? '1000' : '100'}` }}>
             <Header
                 profile={false}
                 goback={false}
@@ -109,34 +138,42 @@ const UpdateProfile = () => {
                     <div className="section text-center">
                         <div className="avatar-section">
                             <div
-                                className=""
+                                className="mt-2"
                                 style={{ cursor: 'pointer', }}
                             >
                                 <input
                                     type="file"
-                                    id="profilePic"
-                                    className='d-none'
-                                    name="profilePic"
-                                    accept="image/*"
+                                    className={`form-control`}
+                                    id="imageFile"
+                                    onChange={handleImageChange}
+                                    name='uimage'
+                                    style={{ display: 'none' }}
                                 />
-                                <img
-                                    className="imaged rounded shadow"
-                                    src={"/assets/img/sample/avatar/avatar.png"}
-                                    style={{ height: '100px', width: '100px' }}
-                                />
-                                {/* <label htmlFor='changeImage'
-                                className="button"
-                                style={{ cursor: 'pointer' }}>
-                                <ion-icon name="camera-outline"></ion-icon>
-                            </label> */}
+                                {
+                                    showChangeImage
+                                        ? <img src={showChangeImage} className="imaged rounded shadow" alt="Preview" style={{ height: '100px', width: '100px' }} />
+                                        : <img src={`${SITE_URL}new/app/upload/profile_pic/${profilePic}`} className="imaged rounded shadow" alt="" style={{ height: '100px', width: '100px' }} />
+                                }
+                                <label htmlFor="imageFile"
+                                    className="button"
+                                    style={{ cursor: 'pointer' }}>
+                                    <ion-icon name="camera-outline"></ion-icon>
+                                </label>
                             </div>
 
                         </div>
                         <div className="my-3">
                             <p className='m-0' style={{ color: 'black', fontWeight: '500' }}>
-                                {window.localStorage.getItem("user_name") === 'null' ? '' : window.localStorage.getItem("user_name")}
+                                {window.localStorage.getItem("user_name") !== "null" ? window.localStorage.getItem("user_name") : ''}
                             </p>
-                            <p className='m-0' style={{ fontSize: '12px' }}><span>+91</span> {window.localStorage.getItem("user_phone")}</p>
+                            {window.localStorage.getItem("user_phone") !== "null" ? (
+                                <p className='m-0' style={{ fontSize: '12px' }}>
+                                    <span>+91</span>{window.localStorage.getItem("user_phone")}
+                                </p>
+                            ) : (
+                                null
+                            )}
+
                         </div>
                     </div>
 

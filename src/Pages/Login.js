@@ -34,11 +34,11 @@ const Login = () => {
                     setIsSubmitting(false);
                 }
                 else if (response.data.status === 102) {
+                    document.querySelector("#otpBtn").disabled = true;
                     toast.success(response.data.msg)
                     setOtpSent(true);
                     setReadOnly(true)
                     setIsSubmitting(false);
-
                     let timer = 30;
                     const timerFunc = setInterval(() => {
                         if (timer > 0) {
@@ -77,10 +77,10 @@ const Login = () => {
                         if (response.data.name) {
                             navigate('/');
                         } else {
-                            navigate('/update-profile?backBtn=false');
+                            navigate('/update-profile');
                         }
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
 
                 }
 
@@ -92,6 +92,7 @@ const Login = () => {
     };
 
     const handleOtpChange = (e, index) => {
+        document.getElementById("otpBtn").disabled = false;
         const value = e.target.value.slice(-1);
         const otpArray = formData.otp ? [...formData.otp] : ["", "", "", ""];
         otpArray[index] = value;
@@ -118,6 +119,7 @@ const Login = () => {
     const resendOtp = () => {
         setShowResend(false);
         setOtpSent(false);
+        document.querySelector('#otpBtn').disabled = false;
         document.querySelector('#otpBtn').click();
     };
 
@@ -182,9 +184,8 @@ const Login = () => {
                                     type="submit"
                                     className="btn btn-primary btn-block"
                                     style={{ height: '40px' }}
-                                    disabled={isSubmitting}
                                 >
-                                    {isSubmitting ? 'Submitting...' : (otpSent ? 'Submit' : 'Continue')}
+                                    {otpSent ? "Submit" : "Continue"}
                                 </button>
                             </div>
 
