@@ -50,8 +50,7 @@ const RecommendCourse = () => {
                                 key={item.id}
                                 to={`/course-detail/${item.program_name}`}
                                 className="card mt-2 shadow text-decoration-none border"
-                                style={{ overflow: 'hidden' }}
-                            >
+                                style={{ overflow: 'hidden' }}>
                                 <CardList
                                     title={item.program_name.length > 20 ? item.program_name.substring(0, 20) + ('...') : item.program_name}
                                     image={`${SITE_URL}new/app/upload/course_img/${item.img}`}

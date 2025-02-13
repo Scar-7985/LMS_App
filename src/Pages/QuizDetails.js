@@ -7,7 +7,7 @@ import { SITE_URL } from '../define/Define';
 
 const QuizDetail = () => {
 
-
+    const navigate = useNavigate();
     const { courseData } = useContext(CourseContext);
     const { quizId } = useParams();
 
@@ -20,6 +20,9 @@ const QuizDetail = () => {
         // console.error('Course not found');
     }
 
+    const goToQuiz = (Id) => {
+        navigate("/quiz-sub-category", { state: { quizId: Id } })
+    }
 
     return (
         <>
@@ -37,12 +40,12 @@ const QuizDetail = () => {
                                 {isAuthenticated ?
                                     // If (status === 1) Purchased else not Purchased
                                     (filteredCourse.status === 1 ? (
-                                        <Link
+                                        <button
                                             className='w-100'
-                                            to={'/quiz'}
+                                            onClick={() => goToQuiz(filteredCourse.id)}
                                             style={{ backgroundColor: 'orangered', color: 'white', textDecoration: 'none', display: 'grid', placeItems: 'center' }}>
-                                            Play now
-                                        </Link>
+                                            Start Quiz
+                                        </button>
                                     ) : (
 
                                         <Link

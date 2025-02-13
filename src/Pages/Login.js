@@ -74,11 +74,6 @@ const Login = () => {
                         window.localStorage.setItem('user_email', user_email);
                         // ============================================== //
 
-                        if (response.data.name) {
-                            navigate('/');
-                        } else {
-                            navigate('/update-profile');
-                        }
                         window.location.reload();
                     }, 1000);
 

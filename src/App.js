@@ -31,6 +31,7 @@ import QuizType from './Pages/QuizType';
 import QuizDetails from './Pages/QuizDetails'
 import Doubts from './Pages/Doubts';
 import UserStatus from './define/UserStatus';
+import QuizSubCategory from './Pages/QuizSubCategory';
 
 const App = () => {
 
@@ -141,7 +142,7 @@ const App = () => {
               <QuizDetails />
             </>
           } />
-          <Route path='/quiz_type/:quizType' element={
+          <Route path='/quiz-type' element={
             <>
               <QuizType />
             </>
@@ -150,6 +151,12 @@ const App = () => {
             <>
               <Header profile={true} title={'Quiz Category'} showSearch={false} />
               <QuizCategory />
+            </>
+          } />
+          <Route path='/quiz-sub-category' element={
+            <>
+              <Header profile={true} title={'Select Quiz'} showSearch={false} />
+              <QuizSubCategory />
             </>
           } />
           <Route path='/course_pdf' element={

@@ -17,10 +17,7 @@ const UserStatus = () => {
                         toast.error(response.data.msg);
                         toastShownRef.current = true;
                         setTimeout(() => {
-                            window.localStorage.removeItem("login_id");
-                            window.localStorage.removeItem("user_name");
-                            window.localStorage.removeItem("user_phone");
-                            window.localStorage.removeItem("user_email");
+                            window.localStorage.clear();
                             navigate('/');
                             window.location.reload();
                         }, 1000);

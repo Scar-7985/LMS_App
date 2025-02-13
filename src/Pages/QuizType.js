@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { CourseContext } from '../context/CourseContext'
 import Header from '../components/Header'
 import axios from 'axios'
@@ -7,7 +7,8 @@ import { SITE_URL } from '../define/Define'
 
 const QuizType = () => {
 
-    const { quizType } = useParams();
+    const location = useLocation();
+    const { quizType } = location.state;
     // Courses Data
     const { courseData } = useContext(CourseContext);
 
@@ -67,7 +68,7 @@ const QuizType = () => {
                                                     <h4 className='text-secondary' style={{ fontSize: '16px', wordWrap: 'break-word', height: '40px' }}>{item.program_name.length > 20 ? item.program_name.substring(0, 20) + "..." : item.program_name}
                                                     </h4>
                                                     <h5 className='p-0 text-secondary' style={{ fontSize: '12px' }}>Questions : {item.category}</h5>
-                                                    
+
                                                 </div>
                                             </div>
 
